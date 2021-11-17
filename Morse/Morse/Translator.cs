@@ -78,7 +78,10 @@ namespace Morse
                     if (item == " ")
                     {
                         result += item;
-                        result += " ";
+                    }
+                    if (item == "...---...")
+                    {
+                        result += "SOS";
                     }
 
                     foreach (Translator symbol in Language)
