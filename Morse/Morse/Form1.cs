@@ -13,14 +13,19 @@ namespace Morse
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string input = textBox1.Text; // Алгоритамът за преверка на символа е готов.
-                                          // Трябва да се направи алгоритъма за разделщне на символите.
+            Translator translator = new Translator();
 
+            List<string> input;
+
+            input = translator.removeSpace(textBox1.Text);
+
+            label1.Text = "Start:\n";
+            
             try
             {
                 List<Translator> International;
@@ -31,11 +36,6 @@ namespace Morse
                     string json = r.ReadToEnd();
 
                     International = JsonConvert.DeserializeObject<List<Translator>>(json);
-
-                    foreach (Translator item in International)
-                    {
-                        if (item.Code == input) MessageBox.Show(item.Symbol);
-                    }
                 }
 
                 using (StreamReader r = new StreamReader(path + "JSON/Numbers.json"))
@@ -43,10 +43,32 @@ namespace Morse
                     string json = r.ReadToEnd();
 
                     Numbers = JsonConvert.DeserializeObject<List<Translator>>(json);
+                }
 
-                    foreach (Translator item in Numbers)
+                foreach (string item in input)
+                {
+                    if (item == " ")
                     {
-                        if (item.Code == input) MessageBox.Show(item.Symbol);
+                        label1.Text += item;
+                        label1.Text += "\n";
+                    }
+
+                    foreach (Translator symbol in International)
+                    {
+                        if (symbol.Code == item)
+                        {
+                            label1.Text += symbol.Symbol;
+                            label1.Text += "\n";
+                        }
+                    }
+
+                    foreach (Translator symbol in Numbers)
+                    {
+                        if (symbol.Code == item)
+                        {
+                            label1.Text += symbol.Symbol;
+                            label1.Text += "\n";
+                        }
                     }
                 }
             }
@@ -59,6 +81,13 @@ namespace Morse
                 MessageBox.Show("Проблем в четенето на JSON файловете.\n" +
                     "Липстващ елемент.", "Error");
             }
+
+
+
+
+
+
+            label1.Text += "*";
         }
     }
 }
