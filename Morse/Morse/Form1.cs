@@ -16,7 +16,8 @@ namespace Morse
         {
             Translator translator = new Translator();
 
-            label1.Text = translator.morseToLanguage(textBox1.Text);
+            //label1.Text = translator.morseToLanguage(textBox1.Text);
+            label1.Text = translator.languageToMorse(textBox1.Text.ToUpper());
         }
     }
 }

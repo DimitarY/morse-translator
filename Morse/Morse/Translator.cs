@@ -10,7 +10,7 @@ namespace Morse
     internal class Translator
     {
         public string path = "D:/Projects/C#/morse-translator/Morse/Morse/";
-        public string Symbol { get; set; }
+        public char Symbol { get; set; }
         public string Code { get; set; }
 
         private List<string> removeSpaceFromMorse(string input)
@@ -99,6 +99,73 @@ namespace Morse
                             result += symbol.Symbol;
                         }
                     }
+                }
+
+                return result;
+            }
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                return "Необходимите файлове не можаха да бъдат намерени";
+            }
+            catch (Newtonsoft.Json.JsonReaderException)
+            {
+                return "Проблем в четенето на JSON файловете.\nЛипстващ елемент.";
+            }
+        }
+
+        public String languageToMorse(string input) // В бъдеще ще приема и език
+        {
+            try
+            {
+                List<Translator> Language;
+                List<Translator> Numbers;
+
+                using (StreamReader r = new StreamReader(path + "JSON/International.json"))
+                {
+                    string json = r.ReadToEnd();
+
+                    Language = JsonConvert.DeserializeObject<List<Translator>>(json);
+                }
+
+                using (StreamReader r = new StreamReader(path + "JSON/Numbers.json"))
+                {
+                    string json = r.ReadToEnd();
+
+                    Numbers = JsonConvert.DeserializeObject<List<Translator>>(json);
+                }
+
+                string temp = "", result = "";
+
+                foreach (char item in input)
+                {
+                    if (item == ' ')
+                    {
+                        temp += "       "; // Word end
+                    }
+
+                    foreach (Translator symbol in Language)
+                    {
+                        if (symbol.Symbol == item)
+                        {
+                            temp += symbol.Code;
+                            temp += "  "; // Letter end
+                        }
+                    }
+
+                    foreach (Translator symbol in Numbers)
+                    {
+                        if (symbol.Symbol == item)
+                        {
+                            temp += symbol.Code;
+                            temp += "  "; // Letter end
+                        }
+                    }
+                }
+
+                foreach (char item in temp)
+                {
+                    result += item;
+                    if (item == '.' || item == '-') result += ' ';
                 }
 
                 return result;
