@@ -9,7 +9,7 @@ namespace Morse
 {
     internal class Translator
     {
-        public string path = "D:/Projects/C#/morse-translator/Morse/Morse/";
+        public string path = "D:/Projects/C#/morse-translator/";
         public char Symbol { get; set; }
         public string Code { get; set; }
 
