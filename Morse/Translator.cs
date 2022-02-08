@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +10,19 @@ namespace Morse
 {
     internal class Translator
     {
-        public string path = "D:/Projects/C#/morse-translator/";
-        public char Symbol { get; set; }
-        public string Code { get; set; }
+        private string path = "D:/Projects/C#/morse-translator/";
+        private char symbol;
+        private string code;
 
-        private List<string> removeSpaceFromMorse(string input)
+        public char Symbol { get { return symbol; } set { symbol = value; } }
+        public string Code { get { return code; } set { code = value; } }
+
+        private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type
         {
             List<string> result = new List<string>();
 
             string temp = "";
-            int space = 0;
+            ushort space = 0;
 
             foreach (var item in input.Select((value, index) => (value, index)))
             {
@@ -49,14 +53,23 @@ namespace Morse
             return result;
         }
 
-        public String morseToLanguage(string input) // В бъдеще ще приема и език
+        public String morseToLanguage(string input, string outputLanguage)
         {
             try
             {
+                string transtalateLanguagePath = "";
+
+                switch (outputLanguage)
+                {
+                    case "International":
+                        transtalateLanguagePath = path + "JSON/International.json";
+                        break;
+                }
+
                 List<Translator> Language;
                 List<Translator> Numbers;
 
-                using (StreamReader r = new StreamReader(path + "JSON/International.json"))
+                using (StreamReader r = new StreamReader(transtalateLanguagePath))
                 {
                     string json = r.ReadToEnd();
 
@@ -79,6 +92,7 @@ namespace Morse
                     {
                         result += item;
                     }
+
                     if (item == "...---...")
                     {
                         result += "SOS";
@@ -105,7 +119,7 @@ namespace Morse
             }
             catch (System.IO.DirectoryNotFoundException)
             {
-                return "Необходимите файлове не можаха да бъдат намерени";
+                return "Необходимите файлове не можаха да бъдат намерени.";
             }
             catch (Newtonsoft.Json.JsonReaderException)
             {
@@ -113,14 +127,23 @@ namespace Morse
             }
         }
 
-        public String languageToMorse(string input) // В бъдеще ще приема и език
+        public String languageToMorse(string input, string inputLanguage)
         {
             try
             {
+                string transtalateLanguagePath = "";
+
+                switch (inputLanguage)
+                {
+                    case "International":
+                        transtalateLanguagePath = path + "JSON/International.json";
+                        break;
+                }
+
                 List<Translator> Language;
                 List<Translator> Numbers;
 
-                using (StreamReader r = new StreamReader(path + "JSON/International.json"))
+                using (StreamReader r = new StreamReader(transtalateLanguagePath))
                 {
                     string json = r.ReadToEnd();
 
@@ -142,22 +165,24 @@ namespace Morse
                     {
                         temp += "       "; // Word end
                     }
-
-                    foreach (Translator symbol in Language)
+                    else
                     {
-                        if (symbol.Symbol == item)
+                        foreach (Translator symbol in Language)
                         {
-                            temp += symbol.Code;
-                            temp += "  "; // Letter end
+                            if (symbol.Symbol == item)
+                            {
+                                temp += symbol.Code;
+                                temp += "  "; // Letter end
+                            }
                         }
-                    }
 
-                    foreach (Translator symbol in Numbers)
-                    {
-                        if (symbol.Symbol == item)
+                        foreach (Translator symbol in Numbers)
                         {
-                            temp += symbol.Code;
-                            temp += "  "; // Letter end
+                            if (symbol.Symbol == item)
+                            {
+                                temp += symbol.Code;
+                                temp += "  "; // Letter end
+                            }
                         }
                     }
                 }
