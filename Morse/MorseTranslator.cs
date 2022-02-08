@@ -26,6 +26,8 @@ namespace Morse
             // Трябва да се оптимизира, така че да взима какви езикови пакети има като JSON
             selctionBox.Items.Add("International to Morse");
             selctionBox.Items.Add("Morse to International");
+            selctionBox.Items.Add("Bulgarian to Morse");
+            selctionBox.Items.Add("Morse to Bulgarian");
         }
 
         private void translateBtn_Click(object sender, EventArgs e)
@@ -39,6 +41,12 @@ namespace Morse
                     break;
                 case 1:
                     outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper(), "International");
+                    break;
+                case 2:
+                    outputBox.Text = translator.languageToMorse(inputBox.Text.ToUpper(), "Bulgarian");
+                    break;
+                case 3:
+                    outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper(), "Bulgarian");
                     break;
                 default:
                     MessageBox.Show("Please select a type.", "Error");

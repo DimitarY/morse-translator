@@ -14,8 +14,8 @@ namespace Morse
         private char symbol;
         private string code;
 
-        public char Symbol { get { return symbol; } set { symbol = value; } }
-        public string Code { get { return code; } set { code = value; } }
+        public char Symbol { get { return this.symbol; } set { this.symbol = value; } }
+        public string Code { get { return this.code; } set { this.code = value; } }
 
         private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type
         {
@@ -63,6 +63,9 @@ namespace Morse
                 {
                     case "International":
                         transtalateLanguagePath = path + "JSON/International.json";
+                        break;
+                    case "Bulgarian":
+                        transtalateLanguagePath = path + "JSON/Bulgarian.json";
                         break;
                 }
 
@@ -137,6 +140,9 @@ namespace Morse
                 {
                     case "International":
                         transtalateLanguagePath = path + "JSON/International.json";
+                        break;
+                    case "Bulgarian":
+                        transtalateLanguagePath = path + "JSON/Bulgarian.json";
                         break;
                 }
 
