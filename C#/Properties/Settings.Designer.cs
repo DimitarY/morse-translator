@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Morse.Properties
+namespace Morse_Translator.Properties
 {
 
 

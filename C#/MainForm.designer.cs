@@ -1,6 +1,6 @@
-﻿namespace Morse
+﻿namespace Morse_Translator
 {
-    partial class MorseTranslator
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -75,14 +75,14 @@
             // 
             // outputBox
             // 
-            this.outputBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.outputBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outputBox.Location = new System.Drawing.Point(12, 223);
             this.outputBox.Name = "outputBox";
             this.outputBox.Size = new System.Drawing.Size(776, 96);
             this.outputBox.TabIndex = 3;
             this.outputBox.Text = "";
             // 
-            // MorseTranslator
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,7 +92,7 @@
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.translateBtn);
             this.Controls.Add(this.selctionBox);
-            this.Name = "MorseTranslator";
+            this.Name = "MainForm";
             this.Text = "Morse Translator";
             this.Load += new System.EventHandler(this.MorseTranslator_Load);
             this.ResumeLayout(false);

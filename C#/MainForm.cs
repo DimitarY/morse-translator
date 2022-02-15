@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Morse
+namespace Morse_Translator
 {
-    public partial class MorseTranslator : Form
+    public partial class MainForm : Form
     {
-        public MorseTranslator()
+        public MainForm()
         {
             InitializeComponent();
         }

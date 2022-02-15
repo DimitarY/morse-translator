@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Morse
+namespace Morse_Translator
 {
     internal class Translator
     {
-        private string path = "D:/Projects/C#/morse-translator/";
+        private string path = "D:/Projects/morse-translator/";
         private char symbol;
         private string code;
 
