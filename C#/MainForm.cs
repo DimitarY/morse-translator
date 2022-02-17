@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,12 +27,27 @@ namespace Morse_Translator
             inputBox.BorderStyle = BorderStyle.FixedSingle;
 
             translateBtn.Size = new Size(translateBtn.Width, selctionBox.Height);
+            playBtn.Size = new Size(translateBtn.Width, selctionBox.Height);
 
             // Трябва да се оптимизира, така че да взима какви езикови пакети има като JSON
             selctionBox.Items.Add("International to Morse");
             selctionBox.Items.Add("Morse to International");
             selctionBox.Items.Add("Bulgarian to Morse");
             selctionBox.Items.Add("Morse to Bulgarian");
+        }
+
+        private void button_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.SteelBlue;
+            btn.ForeColor = Color.Black;
+        }
+
+        private void button_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.White;
+            btn.ForeColor = Color.Black;
         }
 
         private void translateBtn_Click(object sender, EventArgs e)
@@ -58,16 +74,38 @@ namespace Morse_Translator
             System.GC.Collect();
         }
 
-        private void translateBtn_MouseEnter(object sender, EventArgs e)
+        private void play_Click(object sender, EventArgs e)
         {
-            translateBtn.BackColor = Color.SteelBlue;
-            translateBtn.ForeColor = Color.Black;
-        }
+            this.translateBtn_Click(sender, e);
 
-        private void translateBtn_MouseLeave(object sender, EventArgs e)
-        {
-            translateBtn.BackColor = Color.White;
-            translateBtn.ForeColor = Color.Black;
+            SoundPlayer dit = new SoundPlayer("D:/Projects/morse-translator/Sounds/dit.wav");
+            SoundPlayer dot = new SoundPlayer("D:/Projects/morse-translator/Sounds/dot.wav");
+            switch (selctionBox.SelectedIndex)
+            {
+                case 0:
+                case 2:
+                    System.Threading.Thread.Sleep(500);
+                    foreach (var item in outputBox.Text)
+                    {
+                        if (item == '.') dit.PlaySync();
+                        else if (item == '-') dot.PlaySync();
+                        else if (item == ' ') System.Threading.Thread.Sleep(5);
+                    }
+                    break;
+                case 1:
+                case 3:
+                    System.Threading.Thread.Sleep(500);
+                    foreach (var item in inputBox.Text)
+                    {
+                        if (item == '.') dit.PlaySync();
+                        else if (item == '-') dot.PlaySync();
+                        else if (item == ' ') System.Threading.Thread.Sleep(5);
+                    }
+                    break;
+                default:
+                    MessageBox.Show("Please select a type.", "Error");
+                    break;
+            }
         }
     }
 }
