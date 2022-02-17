@@ -10,7 +10,29 @@ namespace Morse_Translator
 {
     internal class Translator
     {
+        // The space between symbols(dots and dashes) of the same letter is 1 time unit.
+        // The space between letters is 3 time units.
+        // The space between words is 7 time units.
+
+        private static Translator instance = null;
+        public static Translator Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Translator();
+                }
+                return instance;
+            }
+        }
+
+        private static List<Translator> Language;
+        private static List<Translator> Numbers;
+        private static List<Translator> Symbols;
+
         private string path = "D:/Projects/morse-translator/";
+
         private char symbol;
         private string code;
 
@@ -53,13 +75,13 @@ namespace Morse_Translator
             return result;
         }
 
-        public String morseToLanguage(string input, string outputLanguage)
+        private void loadData(string language)
         {
             try
             {
-                string transtalateLanguagePath = "";
+                string transtalateLanguagePath = "", json;
 
-                switch (outputLanguage)
+                switch (language)
                 {
                     case "International":
                         transtalateLanguagePath = path + "JSON/International.json";
@@ -69,146 +91,151 @@ namespace Morse_Translator
                         break;
                 }
 
-                List<Translator> Language;
-                List<Translator> Numbers;
-
                 using (StreamReader r = new StreamReader(transtalateLanguagePath))
                 {
-                    string json = r.ReadToEnd();
+                    json = r.ReadToEnd();
 
                     Language = JsonConvert.DeserializeObject<List<Translator>>(json);
                 }
 
                 using (StreamReader r = new StreamReader(path + "JSON/Numbers.json"))
                 {
-                    string json = r.ReadToEnd();
+                    json = r.ReadToEnd();
 
                     Numbers = JsonConvert.DeserializeObject<List<Translator>>(json);
                 }
 
-                List<string> array = this.removeSpaceFromMorse(input);
-                string result = "";
-
-                foreach (string item in array)
+                using (StreamReader r = new StreamReader(path + "JSON/Symbols.json"))
                 {
-                    if (item == " ")
-                    {
-                        result += item;
-                    }
+                    json = r.ReadToEnd();
 
-                    if (item == "...---...")
-                    {
-                        result += "SOS";
-                    }
+                    Symbols = JsonConvert.DeserializeObject<List<Translator>>(json);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-                    foreach (Translator symbol in Language)
-                    {
-                        if (symbol.Code == item)
-                        {
-                            result += symbol.Symbol;
-                        }
-                    }
+            //catch (System.IO.DirectoryNotFoundException)
+            //{
+            //    return "Необходимите файлове не можаха да бъдат намерени.";
+            //}
+            //catch (Newtonsoft.Json.JsonReaderException)
+            //{
+            //    return "Проблем в четенето на JSON файловете.\nЛипстващ елемент.";
+            //}
+        }
 
-                    foreach (Translator symbol in Numbers)
+        // Не е оптимизирано при откриване на символа да продължи към следвашия и да изпишва грешка при непознат символ.
+        public String morseToLanguage(string input, string outputLanguage)
+        {
+            loadData(outputLanguage);
+
+            string result = "";
+
+            foreach (string item in this.removeSpaceFromMorse(input))
+            {
+                if (item == " ")
+                {
+                    result += item;
+                }
+                else if (item == "...---...")
+                {
+                    result += "SOS";
+                }
+
+                foreach (Translator symbol in Language)
+                {
+                    if (symbol.Code == item)
                     {
-                        if (symbol.Code == item)
-                        {
-                            result += symbol.Symbol;
-                        }
+                        result += symbol.Symbol;
+                        break;
                     }
                 }
 
-                return result;
+                foreach (Translator symbol in Numbers)
+                {
+                    if (symbol.Code == item)
+                    {
+                        result += symbol.Symbol;
+                        break;
+                    }
+                }
+
+                foreach (Translator symbol in Symbols)
+                {
+                    if (symbol.Code == item)
+                    {
+                        result += symbol.Symbol;
+                        break;
+                    }
+                }
             }
-            catch (System.IO.DirectoryNotFoundException)
-            {
-                return "Необходимите файлове не можаха да бъдат намерени.";
-            }
-            catch (Newtonsoft.Json.JsonReaderException)
-            {
-                return "Проблем в четенето на JSON файловете.\nЛипстващ елемент.";
-            }
+
+            return result;
         }
 
         public String languageToMorse(string input, string inputLanguage)
         {
-            try
+            loadData(inputLanguage);
+
+            string temp = "", result = "";
+
+            for (int i = 0; i < input.Length; i++)
             {
-                string transtalateLanguagePath = "";
+                char item = input[i];
 
-                switch (inputLanguage)
+                if (item == ' ')
                 {
-                    case "International":
-                        transtalateLanguagePath = path + "JSON/International.json";
-                        break;
-                    case "Bulgarian":
-                        transtalateLanguagePath = path + "JSON/Bulgarian.json";
-                        break;
+                    if (i > 0 && input[i - 1] != ' ') temp += "  ";
+                    else temp += "     ";
                 }
-
-                List<Translator> Language;
-                List<Translator> Numbers;
-
-                using (StreamReader r = new StreamReader(transtalateLanguagePath))
+                else if (Char.IsLetter(item))
                 {
-                    string json = r.ReadToEnd();
-
-                    Language = JsonConvert.DeserializeObject<List<Translator>>(json);
-                }
-
-                using (StreamReader r = new StreamReader(path + "JSON/Numbers.json"))
-                {
-                    string json = r.ReadToEnd();
-
-                    Numbers = JsonConvert.DeserializeObject<List<Translator>>(json);
-                }
-
-                string temp = "", result = "";
-
-                foreach (char item in input)
-                {
-                    if (item == ' ')
+                    foreach (Translator symbol in Language)
                     {
-                        temp += "       "; // Word end
-                    }
-                    else
-                    {
-                        foreach (Translator symbol in Language)
+                        if (symbol.Symbol == item)
                         {
-                            if (symbol.Symbol == item)
-                            {
-                                temp += symbol.Code;
-                                temp += "  "; // Letter end
-                            }
+                            temp += symbol.Code;
+                            break;
                         }
-
-                        foreach (Translator symbol in Numbers)
+                    }
+                }
+                else if (Char.IsDigit(item))
+                {
+                    foreach (Translator symbol in Numbers)
+                    {
+                        if (symbol.Symbol == item)
                         {
-                            if (symbol.Symbol == item)
-                            {
-                                temp += symbol.Code;
-                                temp += "  "; // Letter end
-                            }
+                            temp += symbol.Code;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Translator symbol in Symbols)
+                    {
+                        if (symbol.Symbol == item)
+                        {
+                            temp += symbol.Code;
+                            break;
                         }
                     }
                 }
 
-                foreach (char item in temp)
-                {
-                    result += item;
-                    if (item == '.' || item == '-') result += ' ';
-                }
+                temp += "  ";
+            }
 
-                return result;
-            }
-            catch (System.IO.DirectoryNotFoundException)
+            // Clean up code so is human readable
+            foreach (char item in temp)
             {
-                return "Необходимите файлове не можаха да бъдат намерени";
+                result += item;
+                if (item == '.' || item == '-') result += ' ';
             }
-            catch (Newtonsoft.Json.JsonReaderException)
-            {
-                return "Проблем в четенето на JSON файловете.\nЛипстващ елемент.";
-            }
+
+            return result;
         }
     }
 }

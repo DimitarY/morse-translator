@@ -12,9 +12,13 @@ namespace Morse_Translator
 {
     public partial class MainForm : Form
     {
+        private Translator Translator;
+
         public MainForm()
         {
             InitializeComponent();
+
+            Translator = Translator.Instance;
         }
 
         private void MorseTranslator_Load(object sender, EventArgs e)
@@ -32,26 +36,26 @@ namespace Morse_Translator
 
         private void translateBtn_Click(object sender, EventArgs e)
         {
-            Translator translator = new Translator();
-
             switch (selctionBox.SelectedIndex)
             {
                 case 0:
-                    outputBox.Text = translator.languageToMorse(inputBox.Text.ToUpper(), "International");
+                    outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), "International");
                     break;
                 case 1:
-                    outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper(), "International");
+                    outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), "International");
                     break;
                 case 2:
-                    outputBox.Text = translator.languageToMorse(inputBox.Text.ToUpper(), "Bulgarian");
+                    outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), "Bulgarian");
                     break;
                 case 3:
-                    outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper(), "Bulgarian");
+                    outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), "Bulgarian");
                     break;
                 default:
                     MessageBox.Show("Please select a type.", "Error");
                     break;
             }
+
+            System.GC.Collect();
         }
 
         private void translateBtn_MouseEnter(object sender, EventArgs e)
