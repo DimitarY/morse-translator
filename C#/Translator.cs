@@ -184,29 +184,32 @@ namespace Morse_Translator
 
             for (int i = 0; i < input.Length; i++)
             {
-                char item = input[i];
-
-                if (item == ' ')
+                if (input[i] == ' ')
                 {
                     if (i > 0 && input[i - 1] != ' ') temp += "  ";
                     else temp += "     ";
                 }
-                else if (Char.IsLetter(item))
+                else if (input[i] == 'S' && input.Length >= i + 2 && input[i + 1] == 'O' && input[i + 2] == 'S')
+                {
+                    temp += "...---...";
+                    i += 2;
+                }
+                else if (Char.IsLetter(input[i]))
                 {
                     foreach (Translator symbol in Language)
                     {
-                        if (symbol.Symbol == item)
+                        if (symbol.Symbol == input[i])
                         {
                             temp += symbol.Code;
                             break;
                         }
                     }
                 }
-                else if (Char.IsDigit(item))
+                else if (Char.IsDigit(input[i]))
                 {
                     foreach (Translator symbol in Numbers)
                     {
-                        if (symbol.Symbol == item)
+                        if (symbol.Symbol == input[i])
                         {
                             temp += symbol.Code;
                             break;
@@ -217,7 +220,7 @@ namespace Morse_Translator
                 {
                     foreach (Translator symbol in Symbols)
                     {
-                        if (symbol.Symbol == item)
+                        if (symbol.Symbol == input[i])
                         {
                             temp += symbol.Code;
                             break;
