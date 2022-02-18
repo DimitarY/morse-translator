@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace Morse_Translator
 {
@@ -239,6 +240,28 @@ namespace Morse_Translator
             }
 
             return result;
+        }
+
+        public void playMorseAsSound(RichTextBox richTextBox)
+        {
+            try
+            {
+                bool status = richTextBox.Enabled;
+                richTextBox.Enabled = false;
+
+                foreach (var item in richTextBox.Text)
+                {
+                    if (item == '.') Console.Beep(550, 100);
+                    else if (item == '-') Console.Beep(550, 300);
+                    else Task.Delay(300);
+                }
+
+                richTextBox.Enabled = status;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

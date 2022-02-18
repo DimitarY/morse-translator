@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Morse_Translator
@@ -15,25 +15,43 @@ namespace Morse_Translator
     {
         private Translator Translator;
 
+        private Thread playOutput;
+        private Thread playInput;
+
         public MainForm()
         {
             InitializeComponent();
 
             Translator = Translator.Instance;
+
+            playOutput = new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                Translator.playMorseAsSound(outputBox);
+            });
+
+            playInput = new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                Translator.playMorseAsSound(inputBox);
+            });
         }
 
         private void MorseTranslator_Load(object sender, EventArgs e)
         {
             inputBox.BorderStyle = BorderStyle.FixedSingle;
 
-            translateBtn.Size = new Size(translateBtn.Width, selctionBox.Height);
-            playBtn.Size = new Size(translateBtn.Width, selctionBox.Height);
+            translateBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
+            playBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
+            stopBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
 
             // Трябва да се оптимизира, така че да взима какви езикови пакети има като JSON
-            selctionBox.Items.Add("International to Morse");
-            selctionBox.Items.Add("Morse to International");
-            selctionBox.Items.Add("Bulgarian to Morse");
-            selctionBox.Items.Add("Morse to Bulgarian");
+            selectionBox.Items.Add("International to Morse");
+            selectionBox.Items.Add("Morse to International");
+            selectionBox.Items.Add("Bulgarian to Morse");
+            selectionBox.Items.Add("Morse to Bulgarian");
+
+            selectionBox.SelectedIndex = 0;
         }
 
         private void button_MouseEnter(object sender, EventArgs e)
@@ -52,7 +70,7 @@ namespace Morse_Translator
 
         private void translateBtn_Click(object sender, EventArgs e)
         {
-            switch (selctionBox.SelectedIndex)
+            switch (selectionBox.SelectedIndex)
             {
                 case 0:
                     outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), "International");
@@ -74,38 +92,31 @@ namespace Morse_Translator
             System.GC.Collect();
         }
 
-        private void play_Click(object sender, EventArgs e)
+        private void playMorse(object sender, EventArgs e)
         {
             this.translateBtn_Click(sender, e);
 
-            SoundPlayer dit = new SoundPlayer("D:/Projects/morse-translator/Sounds/dit.wav");
-            SoundPlayer dot = new SoundPlayer("D:/Projects/morse-translator/Sounds/dot.wav");
-            switch (selctionBox.SelectedIndex)
+            Button btn = (Button)sender;
+
+            switch (selectionBox.SelectedIndex)
             {
                 case 0:
                 case 2:
-                    System.Threading.Thread.Sleep(500);
-                    foreach (var item in outputBox.Text)
-                    {
-                        if (item == '.') dit.PlaySync();
-                        else if (item == '-') dot.PlaySync();
-                        else if (item == ' ') System.Threading.Thread.Sleep(5);
-                    }
+                    if (btn.Name == "playBtn") playOutput.Start();
+                    else if (btn.Name == "stopBtn") playOutput.Abort();
                     break;
                 case 1:
                 case 3:
-                    System.Threading.Thread.Sleep(500);
-                    foreach (var item in inputBox.Text)
-                    {
-                        if (item == '.') dit.PlaySync();
-                        else if (item == '-') dot.PlaySync();
-                        else if (item == ' ') System.Threading.Thread.Sleep(5);
-                    }
-                    break;
-                default:
-                    MessageBox.Show("Please select a type.", "Error");
+                    if (btn.Name == "playBtn") playInput.Start();
+                    else if (btn.Name == "stopBtn") playInput.Abort();
                     break;
             }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            playOutput.Abort();
+            playInput.Abort();
         }
     }
 }

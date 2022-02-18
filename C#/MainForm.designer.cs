@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.selctionBox = new System.Windows.Forms.ComboBox();
+            this.selectionBox = new System.Windows.Forms.ComboBox();
             this.translateBtn = new System.Windows.Forms.Button();
             this.inputBox = new System.Windows.Forms.RichTextBox();
             this.outputBox = new System.Windows.Forms.RichTextBox();
             this.playBtn = new System.Windows.Forms.Button();
+            this.stopBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // selctionBox
+            // selectionBox
             // 
-            this.selctionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selctionBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selctionBox.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.selctionBox.FormattingEnabled = true;
-            this.selctionBox.ItemHeight = 17;
-            this.selctionBox.Location = new System.Drawing.Point(441, 24);
-            this.selctionBox.Name = "selctionBox";
-            this.selctionBox.Size = new System.Drawing.Size(225, 25);
-            this.selctionBox.TabIndex = 1;
+            this.selectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectionBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.selectionBox.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.selectionBox.FormattingEnabled = true;
+            this.selectionBox.ItemHeight = 17;
+            this.selectionBox.Location = new System.Drawing.Point(441, 24);
+            this.selectionBox.Name = "selectionBox";
+            this.selectionBox.Size = new System.Drawing.Size(225, 25);
+            this.selectionBox.TabIndex = 1;
             // 
             // translateBtn
             // 
@@ -76,6 +77,7 @@
             // 
             // outputBox
             // 
+            this.outputBox.Enabled = false;
             this.outputBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outputBox.Location = new System.Drawing.Point(12, 223);
             this.outputBox.Name = "outputBox";
@@ -96,11 +98,25 @@
             this.playBtn.TabIndex = 3;
             this.playBtn.Text = "Play";
             this.playBtn.UseVisualStyleBackColor = false;
-            this.playBtn.Click += new System.EventHandler(this.play_Click);
+            this.playBtn.Click += new System.EventHandler(this.playMorse);
             this.playBtn.Enter += new System.EventHandler(this.button_MouseEnter);
             this.playBtn.Leave += new System.EventHandler(this.button_MouseLeave);
             this.playBtn.MouseEnter += new System.EventHandler(this.button_MouseEnter);
             this.playBtn.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            // 
+            // stopBtn
+            // 
+            this.stopBtn.BackColor = System.Drawing.Color.White;
+            this.stopBtn.FlatAppearance.BorderSize = 0;
+            this.stopBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopBtn.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.stopBtn.Location = new System.Drawing.Point(126, 24);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(108, 25);
+            this.stopBtn.TabIndex = 4;
+            this.stopBtn.Text = "Stop";
+            this.stopBtn.UseVisualStyleBackColor = false;
+            this.stopBtn.Click += new System.EventHandler(this.playMorse);
             // 
             // MainForm
             // 
@@ -108,13 +124,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.playBtn);
             this.Controls.Add(this.outputBox);
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.translateBtn);
-            this.Controls.Add(this.selctionBox);
+            this.Controls.Add(this.selectionBox);
             this.Name = "MainForm";
             this.Text = "Morse Translator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MorseTranslator_Load);
             this.ResumeLayout(false);
 
@@ -122,11 +140,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox selctionBox;
+        private System.Windows.Forms.ComboBox selectionBox;
         private System.Windows.Forms.Button translateBtn;
         private System.Windows.Forms.RichTextBox inputBox;
         private System.Windows.Forms.RichTextBox outputBox;
         private System.Windows.Forms.Button playBtn;
+        private System.Windows.Forms.Button stopBtn;
     }
 }
 
