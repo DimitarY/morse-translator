@@ -117,6 +117,10 @@
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = false;
             this.stopBtn.Click += new System.EventHandler(this.playMorse);
+            this.stopBtn.Enter += new System.EventHandler(this.button_MouseEnter);
+            this.stopBtn.Leave += new System.EventHandler(this.button_MouseLeave);
+            this.stopBtn.MouseEnter += new System.EventHandler(this.button_MouseEnter);
+            this.stopBtn.MouseLeave += new System.EventHandler(this.button_MouseLeave);
             // 
             // MainForm
             // 
