@@ -15,26 +15,16 @@ namespace Morse_Translator
     {
         private Translator Translator;
 
-        private Thread playOutput;
-        private Thread playInput;
+        private Thread playThread = new Thread(() =>
+        {
+            Thread.CurrentThread.IsBackground = true;
+        });
 
         public MainForm()
         {
             InitializeComponent();
 
             Translator = Translator.Instance;
-
-            playOutput = new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                Translator.playMorseAsSound(outputBox);
-            });
-
-            playInput = new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                Translator.playMorseAsSound(inputBox);
-            });
         }
 
         private void MorseTranslator_Load(object sender, EventArgs e)
@@ -102,21 +92,36 @@ namespace Morse_Translator
             {
                 case 0:
                 case 2:
-                    if (btn.Name == "playBtn") playOutput.Start();
-                    else if (btn.Name == "stopBtn") playOutput.Abort();
+                    if (btn.Name == "playBtn")
+                    {
+                        playThread = new Thread(() =>
+                        {
+                            Thread.CurrentThread.IsBackground = true;
+                            Translator.playMorseAsSound(outputBox);
+                        });
+                        playThread.Start();
+                    }
+                    else if (btn.Name == "stopBtn") if (playThread.IsAlive) playThread.Abort();
                     break;
                 case 1:
                 case 3:
-                    if (btn.Name == "playBtn") playInput.Start();
-                    else if (btn.Name == "stopBtn") playInput.Abort();
+                    if (btn.Name == "playBtn")
+                    {
+                        playThread = new Thread(() =>
+                        {
+                            Thread.CurrentThread.IsBackground = true;
+                            Translator.playMorseAsSound(inputBox);
+                        });
+                        playThread.Start();
+                    }
+                    else if (btn.Name == "stopBtn") if (playThread.IsAlive) playThread.Abort();
                     break;
             }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            playOutput.Abort();
-            playInput.Abort();
+            if (playThread.IsAlive) playThread.Abort();
         }
     }
 }
