@@ -32,7 +32,7 @@ namespace Morse_Translator
         private static List<Translator> Numbers;
         private static List<Translator> Symbols;
 
-        private string path = "D:/Projects/morse-translator/";
+        private string path = Path.GetFullPath(Directory.GetCurrentDirectory()) + "\\..\\..\\..\\";
 
         private char symbol;
         private string code;
@@ -40,6 +40,7 @@ namespace Morse_Translator
         public char Symbol { get { return this.symbol; } set { this.symbol = value; } }
         public string Code { get { return this.code; } set { this.code = value; } }
 
+        // Може да е просто string
         private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type
         {
             List<string> result = new List<string>();
