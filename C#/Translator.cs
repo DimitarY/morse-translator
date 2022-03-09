@@ -32,7 +32,7 @@ namespace Morse_Translator
         private static List<Translator> Numbers;
         private static List<Translator> Symbols;
 
-        private string path = Path.GetFullPath(Directory.GetCurrentDirectory()) + "\\..\\..\\..\\";
+        private string path = Path.GetFullPath(Directory.GetCurrentDirectory());
 
         private char symbol;
         private string code;
@@ -86,10 +86,10 @@ namespace Morse_Translator
                 switch (language)
                 {
                     case "International":
-                        transtalateLanguagePath = path + "JSON/International.json";
+                        transtalateLanguagePath = path + "/JSON/International.json";
                         break;
                     case "Bulgarian":
-                        transtalateLanguagePath = path + "JSON/Bulgarian.json";
+                        transtalateLanguagePath = path + "/JSON/Bulgarian.json";
                         break;
                 }
 
@@ -100,14 +100,14 @@ namespace Morse_Translator
                     Language = JsonConvert.DeserializeObject<List<Translator>>(json);
                 }
 
-                using (StreamReader r = new StreamReader(path + "JSON/Numbers.json"))
+                using (StreamReader r = new StreamReader(path + "/JSON/Numbers.json"))
                 {
                     json = r.ReadToEnd();
 
                     Numbers = JsonConvert.DeserializeObject<List<Translator>>(json);
                 }
 
-                using (StreamReader r = new StreamReader(path + "JSON/Symbols.json"))
+                using (StreamReader r = new StreamReader(path + "/JSON/Symbols.json"))
                 {
                     json = r.ReadToEnd();
 
