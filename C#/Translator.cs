@@ -40,7 +40,19 @@ namespace Morse_Translator
         public char Symbol { get { return this.symbol; } set { this.symbol = value; } }
         public string Code { get { return this.code; } set { this.code = value; } }
 
-        // Може да е просто string
+        public List<string> getLanguages()
+        {
+            List<string> result = new List<string>();
+
+            FileInfo[] files = new DirectoryInfo(path + "/JSON").GetFiles("*.json");
+            foreach (FileInfo file in files)
+            {
+                if (file.Name != "Symbols.json" && file.Name != "Numbers.json") result.Add(file.Name.Remove(file.Name.Length - 5));
+            }
+
+            return result;
+        }
+
         private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type
         {
             List<string> result = new List<string>();
@@ -81,19 +93,9 @@ namespace Morse_Translator
         {
             try
             {
-                string transtalateLanguagePath = "", json;
+                string json;
 
-                switch (language)
-                {
-                    case "International":
-                        transtalateLanguagePath = path + "/JSON/International.json";
-                        break;
-                    case "Bulgarian":
-                        transtalateLanguagePath = path + "/JSON/Bulgarian.json";
-                        break;
-                }
-
-                using (StreamReader r = new StreamReader(transtalateLanguagePath))
+                using (StreamReader r = new StreamReader(path + "/JSON/" + language + ".json"))
                 {
                     json = r.ReadToEnd();
 

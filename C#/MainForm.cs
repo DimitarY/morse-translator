@@ -35,11 +35,11 @@ namespace Morse_Translator
             playBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
             stopBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
 
-            // Трябва да се оптимизира, така че да взима какви езикови пакети има като JSON
-            selectionBox.Items.Add("International to Morse");
-            selectionBox.Items.Add("Morse to International");
-            selectionBox.Items.Add("Bulgarian to Morse");
-            selectionBox.Items.Add("Morse to Bulgarian");
+            foreach (var item in Translator.getLanguages())
+            {
+                selectionBox.Items.Add(item + " to Morse");
+                selectionBox.Items.Add("Morse to " + item);
+            }
 
             selectionBox.SelectedIndex = 0;
         }
@@ -60,24 +60,15 @@ namespace Morse_Translator
 
         private void translateBtn_Click(object sender, EventArgs e)
         {
-            switch (selectionBox.SelectedIndex)
+            if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0)
             {
-                case 0:
-                    outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), "International");
-                    break;
-                case 1:
-                    outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), "International");
-                    break;
-                case 2:
-                    outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), "Bulgarian");
-                    break;
-                case 3:
-                    outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), "Bulgarian");
-                    break;
-                default:
-                    MessageBox.Show("Please select a type.", "Error");
-                    break;
+                outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
             }
+            else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0)
+            {
+                outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), selectionBox.SelectedItem.ToString().Remove(0, 9));
+            }
+            else MessageBox.Show("Please select a type.", "Error");
 
             System.GC.Collect();
         }
