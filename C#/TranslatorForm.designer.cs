@@ -1,6 +1,6 @@
 ﻿namespace Morse_Translator
 {
-    partial class MainForm
+    partial class TranslatorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TranslatorForm));
             this.selectionBox = new System.Windows.Forms.ComboBox();
             this.translateBtn = new System.Windows.Forms.Button();
             this.inputBox = new System.Windows.Forms.RichTextBox();

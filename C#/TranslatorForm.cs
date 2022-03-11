@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Morse_Translator
 {
-    public partial class MainForm : Form
+    public partial class TranslatorForm : Form
     {
         private Translator Translator;
 
@@ -20,7 +20,7 @@ namespace Morse_Translator
             Thread.CurrentThread.IsBackground = true;
         });
 
-        public MainForm()
+        public TranslatorForm()
         {
             InitializeComponent();
 
