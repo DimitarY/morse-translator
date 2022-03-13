@@ -8,11 +8,42 @@ using System.Media;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Morse_Translator
 {
     public partial class TranslatorForm : Form
     {
+        // On Mouse Down on topPanel move window
+        const int HT_CAPTION = 0x2;
+        const int WM_NCLBUTTONDOWN = 0xA1;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        // END
+
+        // Get default context menu
+        private const int WS_SYSMENU = 0x80000;
+        private const int WS_MINIMIZEBOX = 0x20000;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams p = base.CreateParams;
+                p.Style = WS_SYSMENU | WS_MINIMIZEBOX;
+                return p;
+            }
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+        private const int WM_POPUPSYSTEMMENU = 0x313;
+        // END
+
         private Translator Translator;
 
         private Thread playThread = new Thread(() =>
@@ -29,7 +60,7 @@ namespace Morse_Translator
 
         private void TranslatorForm_Load(object sender, EventArgs e)
         {
-            inputBox.BorderStyle = BorderStyle.FixedSingle;
+            this.MaximizeBox = false;
 
             translateBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
             playBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
@@ -128,6 +159,30 @@ namespace Morse_Translator
                 this.translateBtn_Click(sender, e);
                 e.Handled = true;
             }
+        }
+
+        private void topPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                var p = MousePosition.X + (MousePosition.Y * 0x10000);
+                SendMessage(this.Handle, WM_POPUPSYSTEMMENU, (IntPtr)0, (IntPtr)p);
+            }
+        }
+
+        private void minimizeBtn_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
