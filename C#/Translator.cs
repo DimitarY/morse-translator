@@ -79,6 +79,12 @@ namespace Morse_Translator
                     temp += item.value;
                 }
                 else if (item.value == ' ') space++;
+                else if (item.value == '\n')
+                {
+                    result.Add(temp);
+                    result.Add("\n");
+                    temp = "";
+                }
 
                 if (item.index == input.Length - 1)
                 {
@@ -144,6 +150,7 @@ namespace Morse_Translator
                 {
                     result += item;
                 }
+                else if (item == "\n") result += item;
                 else if (item == "...---...")
                 {
                     result += "SOS";
@@ -193,6 +200,7 @@ namespace Morse_Translator
                     if (i > 0 && input[i - 1] != ' ') temp += "  ";
                     else temp += "     ";
                 }
+                else if (input[i] == '\n') temp += input[i];
                 else if (input[i] == 'S' && input.Length >= i + 2 && input[i + 1] == 'O' && input[i + 2] == 'S')
                 {
                     temp += "...---...";

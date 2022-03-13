@@ -27,7 +27,7 @@ namespace Morse_Translator
             Translator = Translator.Instance;
         }
 
-        private void MorseTranslator_Load(object sender, EventArgs e)
+        private void TranslatorForm_Load(object sender, EventArgs e)
         {
             inputBox.BorderStyle = BorderStyle.FixedSingle;
 
@@ -35,13 +35,14 @@ namespace Morse_Translator
             playBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
             stopBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
 
+            ushort index = 0;
             foreach (var item in Translator.getLanguages())
             {
                 selectionBox.Items.Add(item + " to Morse");
                 selectionBox.Items.Add("Morse to " + item);
+                if (item == "International") selectionBox.SelectedIndex = index;
+                else index += 2;
             }
-
-            selectionBox.SelectedIndex = 0;
         }
 
         private void button_MouseEnter(object sender, EventArgs e)
@@ -110,9 +111,23 @@ namespace Morse_Translator
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void TranslatorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (playThread.IsAlive) playThread.Abort();
+        }
+
+        private void inputBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (Control.ModifierKeys == Keys.Shift)
+                {
+                    inputBox.Text += "\n";
+                    inputBox.Select(inputBox.Text.Length, 0);
+                }
+                this.translateBtn_Click(sender, e);
+                e.Handled = true;
+            }
         }
     }
 }

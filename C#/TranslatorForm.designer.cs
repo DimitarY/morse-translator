@@ -75,6 +75,7 @@
             this.inputBox.Size = new System.Drawing.Size(776, 96);
             this.inputBox.TabIndex = 0;
             this.inputBox.Text = "";
+            this.inputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputBox_KeyDown);
             // 
             // outputBox
             // 
@@ -123,7 +124,7 @@
             this.stopBtn.MouseEnter += new System.EventHandler(this.button_MouseEnter);
             this.stopBtn.MouseLeave += new System.EventHandler(this.button_MouseLeave);
             // 
-            // MainForm
+            // TranslatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -136,10 +137,10 @@
             this.Controls.Add(this.translateBtn);
             this.Controls.Add(this.selectionBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "TranslatorForm";
             this.Text = "Morse Translator";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MorseTranslator_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TranslatorForm_FormClosing);
+            this.Load += new System.EventHandler(this.TranslatorForm_Load);
             this.ResumeLayout(false);
 
         }
