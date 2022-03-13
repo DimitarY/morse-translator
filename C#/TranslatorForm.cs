@@ -63,8 +63,9 @@ namespace Morse_Translator
             this.MaximizeBox = false;
 
             translateBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
-            playBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
-            stopBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
+
+            inputBox.BringToFront();
+            outputBox.BringToFront();
 
             ushort index = 0;
             foreach (var item in Translator.getLanguages())
@@ -79,7 +80,7 @@ namespace Morse_Translator
         private void button_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            btn.BackColor = Color.SteelBlue;
+            btn.BackColor = Color.Sienna;
             btn.ForeColor = Color.Black;
         }
 
@@ -109,36 +110,31 @@ namespace Morse_Translator
         {
             this.translateBtn_Click(sender, e);
 
-            Button btn = (Button)sender;
-
-            switch (selectionBox.SelectedIndex)
+            if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0)
             {
-                case 0:
-                case 2:
-                    if (btn.Name == "playBtn")
+                if (playThread.IsAlive) playThread.Abort();
+                else
+                {
+                    playThread = new Thread(() =>
                     {
-                        playThread = new Thread(() =>
-                        {
-                            Thread.CurrentThread.IsBackground = true;
-                            Translator.playMorseAsSound(outputBox);
-                        });
-                        playThread.Start();
-                    }
-                    else if (btn.Name == "stopBtn") if (playThread.IsAlive) playThread.Abort();
-                    break;
-                case 1:
-                case 3:
-                    if (btn.Name == "playBtn")
+                        Thread.CurrentThread.IsBackground = true;
+                        Translator.playMorseAsSound(outputBox);
+                    });
+                    playThread.Start();
+                }
+            }
+            else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0)
+            {
+                if (playThread.IsAlive) playThread.Abort();
+                else
+                {
+                    playThread = new Thread(() =>
                     {
-                        playThread = new Thread(() =>
-                        {
-                            Thread.CurrentThread.IsBackground = true;
-                            Translator.playMorseAsSound(inputBox);
-                        });
-                        playThread.Start();
-                    }
-                    else if (btn.Name == "stopBtn") if (playThread.IsAlive) playThread.Abort();
-                    break;
+                        Thread.CurrentThread.IsBackground = true;
+                        Translator.playMorseAsSound(inputBox);
+                    });
+                    playThread.Start();
+                }
             }
         }
 

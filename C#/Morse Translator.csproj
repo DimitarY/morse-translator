@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\tower.ico</ApplicationIcon>
+    <ApplicationIcon>morse-code.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -101,6 +101,9 @@
   <ItemGroup>
     <None Include="Resources\close.png" />
     <None Include="Resources\minimize.png" />
+    <None Include="Resources\play-sign.png" />
+    <Content Include="morse-code.ico" />
+    <Content Include="Resources\morse-code.ico" />
     <Content Include="Resources\tower.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
