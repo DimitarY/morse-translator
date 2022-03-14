@@ -25,6 +25,11 @@ namespace Morse_Translator
         public static extern bool ReleaseCapture();
         // END
 
+        // Round Controls
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(int nLeft, int nTop, int nRight, int nBottom, int nWidthEllipse, int nHeightEllipse);
+        // END
+
         // Get default context menu
         private const int WS_SYSMENU = 0x80000;
         private const int WS_MINIMIZEBOX = 0x20000;
@@ -62,7 +67,8 @@ namespace Morse_Translator
         {
             this.MaximizeBox = false;
 
-            translateBtn.Size = new Size(translateBtn.Width, selectionBox.Height);
+            translateBtn.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, translateBtn.Width, translateBtn.Height, 5, 5));
+            selectionBox.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, selectionBox.Width, selectionBox.Height, 5, 5));
 
             inputBox.BringToFront();
             outputBox.BringToFront();
@@ -80,7 +86,7 @@ namespace Morse_Translator
         private void button_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            btn.BackColor = Color.Sienna;
+            btn.BackColor = Color.DarkSeaGreen;
             btn.ForeColor = Color.Black;
         }
 

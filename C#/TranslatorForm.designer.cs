@@ -51,20 +51,21 @@
             // selectionBox
             // 
             this.selectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectionBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.selectionBox.DropDownWidth = 330;
+            this.selectionBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.selectionBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.selectionBox.FormattingEnabled = true;
             this.selectionBox.ItemHeight = 19;
-            this.selectionBox.Location = new System.Drawing.Point(435, 13);
+            this.selectionBox.Location = new System.Drawing.Point(329, 13);
             this.selectionBox.Name = "selectionBox";
-            this.selectionBox.Size = new System.Drawing.Size(225, 27);
+            this.selectionBox.Size = new System.Drawing.Size(331, 27);
             this.selectionBox.TabIndex = 1;
             // 
             // translateBtn
             // 
             this.translateBtn.BackColor = System.Drawing.Color.White;
             this.translateBtn.FlatAppearance.BorderSize = 0;
-            this.translateBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.translateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.translateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.translateBtn.Location = new System.Drawing.Point(666, 13);
             this.translateBtn.Name = "translateBtn";
