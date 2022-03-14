@@ -41,6 +41,7 @@
             this.playBtn = new System.Windows.Forms.PictureBox();
             this.inputboxLable = new System.Windows.Forms.Label();
             this.outputLable = new System.Windows.Forms.Label();
+            this.clearBtn = new System.Windows.Forms.Button();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).BeginInit();
@@ -60,6 +61,7 @@
             this.selectionBox.Name = "selectionBox";
             this.selectionBox.Size = new System.Drawing.Size(331, 27);
             this.selectionBox.TabIndex = 1;
+            this.selectionBox.SelectedIndexChanged += new System.EventHandler(this.selectionBox_SelectedIndexChanged);
             // 
             // translateBtn
             // 
@@ -88,12 +90,14 @@
             this.inputBox.Size = new System.Drawing.Size(780, 100);
             this.inputBox.TabIndex = 0;
             this.inputBox.Text = "";
+            this.inputBox.VScroll += new System.EventHandler(this.inputBox_VScroll);
+            this.inputBox.TextChanged += new System.EventHandler(this.inputBox_TextChanged);
             this.inputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputBox_KeyDown);
             // 
             // outputBox
             // 
             this.outputBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.outputBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.outputBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outputBox.Location = new System.Drawing.Point(10, 260);
             this.outputBox.Name = "outputBox";
             this.outputBox.ReadOnly = true;
@@ -101,6 +105,7 @@
             this.outputBox.TabIndex = 0;
             this.outputBox.TabStop = false;
             this.outputBox.Text = "";
+            this.outputBox.VScroll += new System.EventHandler(this.outputBox_VScroll);
             // 
             // topPanel
             // 
@@ -199,12 +204,31 @@
             this.outputLable.Text = "Output:";
             this.outputLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // clearBtn
+            // 
+            this.clearBtn.BackColor = System.Drawing.Color.White;
+            this.clearBtn.FlatAppearance.BorderSize = 0;
+            this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clearBtn.Location = new System.Drawing.Point(710, 84);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(80, 30);
+            this.clearBtn.TabIndex = 4;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = false;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            this.clearBtn.Enter += new System.EventHandler(this.button_MouseEnter);
+            this.clearBtn.Leave += new System.EventHandler(this.button_MouseLeave);
+            this.clearBtn.MouseEnter += new System.EventHandler(this.button_MouseEnter);
+            this.clearBtn.MouseLeave += new System.EventHandler(this.button_MouseLeave);
+            // 
             // TranslatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(800, 370);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.outputLable);
             this.Controls.Add(this.inputboxLable);
             this.Controls.Add(this.controlsPanel);
@@ -242,6 +266,7 @@
         private System.Windows.Forms.Label inputboxLable;
         private System.Windows.Forms.Label outputLable;
         private System.Windows.Forms.PictureBox playBtn;
+        private System.Windows.Forms.Button clearBtn;
     }
 }
 

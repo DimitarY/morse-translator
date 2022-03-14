@@ -200,7 +200,6 @@ namespace Morse_Translator
                     if (i > 0 && input[i - 1] != ' ') temp += "  ";
                     else temp += "     ";
                 }
-                else if (input[i] == '\n') temp += input[i];
                 else if (input[i] == 'S' && input.Length >= i + 2 && input[i + 1] == 'O' && input[i + 2] == 'S')
                 {
                     temp += "...---...";
@@ -241,6 +240,7 @@ namespace Morse_Translator
                 }
 
                 temp += "  ";
+                if (input[i] == '\n') temp += input[i];
             }
 
             // Clean up code so is human readable

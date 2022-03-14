@@ -49,8 +49,16 @@ namespace Morse_Translator
         private const int WM_POPUPSYSTEMMENU = 0x313;
         // END
 
-        private Translator Translator;
+        // Synchronizing Multiline Textbox Positions
+        const int WM_USER = 0x400;
+        const int EM_GETSCROLLPOS = WM_USER + 221;
+        const int EM_SETSCROLLPOS = WM_USER + 222;
 
+        [DllImport("user32.dll")]
+        static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
+        // END
+
+        private Translator Translator;
         private Thread playThread = new Thread(() =>
         {
             Thread.CurrentThread.IsBackground = true;
@@ -69,6 +77,7 @@ namespace Morse_Translator
 
             translateBtn.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, translateBtn.Width, translateBtn.Height, 5, 5));
             selectionBox.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, selectionBox.Width, selectionBox.Height, 5, 5));
+            clearBtn.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, clearBtn.Width, clearBtn.Height, 5, 5));
 
             inputBox.BringToFront();
             outputBox.BringToFront();
@@ -86,7 +95,7 @@ namespace Morse_Translator
         private void button_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            btn.BackColor = Color.DarkSeaGreen;
+            btn.BackColor = Color.Silver;
             btn.ForeColor = Color.Black;
         }
 
@@ -110,6 +119,11 @@ namespace Morse_Translator
             else MessageBox.Show("Please select a type.", "Error");
 
             System.GC.Collect();
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            inputBox.Clear();
         }
 
         private void playMorse(object sender, EventArgs e)
@@ -153,14 +167,13 @@ namespace Morse_Translator
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (Control.ModifierKeys == Keys.Shift)
-                {
-                    inputBox.Text += "\n";
-                    inputBox.Select(inputBox.Text.Length, 0);
-                }
-                this.translateBtn_Click(sender, e);
-                e.Handled = true;
+                if (Control.ModifierKeys == Keys.Shift) inputBox.SelectedText = "\n";
             }
+        }
+
+        private void inputBox_TextChanged(object sender, EventArgs e)
+        {
+            this.translateBtn_Click(sender, e);
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -185,6 +198,29 @@ namespace Morse_Translator
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void inputBox_VScroll(object sender, EventArgs e)
+        {
+            Point pt = new Point();
+
+            SendMessage(inputBox.Handle, EM_GETSCROLLPOS, 0, ref pt);
+
+            SendMessage(outputBox.Handle, EM_SETSCROLLPOS, 0, ref pt);
+        }
+
+        private void outputBox_VScroll(object sender, EventArgs e)
+        {
+            Point pt = new Point();
+
+            SendMessage(outputBox.Handle, EM_GETSCROLLPOS, 0, ref pt);
+
+            SendMessage(inputBox.Handle, EM_SETSCROLLPOS, 0, ref pt);
+        }
+
+        private void selectionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            inputBox.Focus();
         }
     }
 }
