@@ -103,6 +103,7 @@
     <None Include="Resources\minimize.png" />
     <None Include="Resources\play-sign.png" />
     <Content Include="morse-code.ico" />
+    <None Include="Resources\exchange.png" />
     <Content Include="Resources\morse-code.ico" />
     <Content Include="Resources\tower.ico" />
   </ItemGroup>

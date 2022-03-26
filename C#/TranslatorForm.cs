@@ -79,6 +79,10 @@ namespace Morse_Translator
             selectionBox.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, selectionBox.Width, selectionBox.Height, 5, 5));
             clearBtn.Region = Region.FromHrgn(CreateRoundRectRgn(2, 2, clearBtn.Width, clearBtn.Height, 5, 5));
 
+            Image img = exchangeBtn.Image;
+            img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            exchangeBtn.Image = img;
+
             inputBox.BringToFront();
             outputBox.BringToFront();
 
@@ -110,11 +114,11 @@ namespace Morse_Translator
         {
             if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0)
             {
-                outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper(), selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
+                outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper());
             }
             else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0)
             {
-                outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper(), selectionBox.SelectedItem.ToString().Remove(0, 9));
+                outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper());
             }
             else MessageBox.Show("Please select a type.", "Error");
 
@@ -171,6 +175,15 @@ namespace Morse_Translator
             }
         }
 
+        private void inputBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (selectionBox.SelectedIndex % 2 != 0 && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != (char)Keys.Space)
+            {
+                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
+                e.Handled = true;
+            }
+        }
+
         private void inputBox_TextChanged(object sender, EventArgs e)
         {
             this.translateBtn_Click(sender, e);
@@ -218,9 +231,27 @@ namespace Morse_Translator
             SendMessage(inputBox.Handle, EM_SETSCROLLPOS, 0, ref pt);
         }
 
+        private void exchangeBtn_Click(object sender, EventArgs e)
+        {
+            inputBox.Text = outputBox.Text;
+            this.translateBtn_Click(sender, e);
+
+            if (selectionBox.SelectedIndex % 2 != 0) selectionBox.SelectedIndex = (int)selectionBox.SelectedIndex - 1;
+            else if (selectionBox.SelectedIndex % 2 == 0) selectionBox.SelectedIndex = (int)selectionBox.SelectedIndex + 1;
+        }
+
         private void selectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (selectionBox.SelectedIndex % 2 != 0)
+            {
+                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
+            }
+            else if (selectionBox.SelectedIndex % 2 == 0)
+            {
+                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
+            }
             inputBox.Focus();
+            this.translateBtn_Click(sender, e);
         }
     }
 }
