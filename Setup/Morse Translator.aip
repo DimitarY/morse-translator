@@ -8,10 +8,10 @@
     <ROW Property="ARPCONTACT" Value="dimitar.yordanov11@outlook.com"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="DLG"/>
-    <ROW Property="ProductCode" Value="1033:{BAF11201-6EA6-48D7-8BB0-F84C01D3A8D7} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{971D7F13-7A87-4F93-86E6-C80C5BC1F9FC} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Morse Translator"/>
-    <ROW Property="ProductVersion" Value="0.3.0"/>
+    <ROW Property="ProductVersion" Value="0.3.1"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{75E4D1CC-607A-45D3-897D-63F93C9514F3}"/>
