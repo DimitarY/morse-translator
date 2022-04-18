@@ -352,3 +352,6 @@ MigrationBackup/
 # Custon rulls
 copyJSON.bat
 бележки.txt
+
+# Advanced Installer
+Morse Translator-cache/
