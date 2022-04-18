@@ -70,6 +70,7 @@ namespace Morse_Translator
         {
             try
             {
+                grammar.Clear();
                 string json;
 
                 using (StreamReader r = new StreamReader(path + "/JSON/" + language + ".json"))
@@ -181,7 +182,7 @@ namespace Morse_Translator
                         break;
                     }
                 }
-                if (!done) result += "(error)";
+                if (!done) result += "(unknown)";
             }
 
             return result;
@@ -216,17 +217,18 @@ namespace Morse_Translator
                             break;
                         }
                     }
-                    if (!done) temp += "(error)";
+                    if (!done) temp += "(unknown)";
                 }
 
                 temp += "  ";
             }
 
             // Clean up code so is human readable
-            foreach (char item in temp)
+            for (int i = 0; i < temp.Length; i++)
             {
-                result += item;
-                if (item == '.' || item == '-') result += ' ';
+                result += temp[i];
+                if (temp[i] == '.' || temp[i] == '-') result += ' ';
+                else if (temp[i] == '\n') i += 2;
             }
 
             return result;
