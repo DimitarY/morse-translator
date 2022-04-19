@@ -36,6 +36,7 @@ namespace Morse_Translator
 
         public char Symbol { get { return this.symbol; } set { this.symbol = value; } }
         public string Code { get { return this.code; } set { this.code = value; } }
+        public List<Translator> Grammar { get { return this.grammar; } }
 
         public static List<string> getLanguages()
         {
