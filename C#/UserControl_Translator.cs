@@ -37,7 +37,7 @@ namespace Morse_Translator
             }
         }
 
-        private Translator Translator;
+        private Translator translator;
         private Thread playThread = new Thread(() =>
         {
             Thread.CurrentThread.IsBackground = true;
@@ -47,7 +47,7 @@ namespace Morse_Translator
         {
             InitializeComponent();
 
-            Translator = Translator.Instance;
+            translator = Translator.Instance;
         }
 
         private void UserControl_Translator_Load(object sender, EventArgs e)
@@ -69,6 +69,24 @@ namespace Morse_Translator
             }
         }
 
+        private void UserControl_Translator_Enter(object sender, EventArgs e)
+        {
+            selectionBox.Items.Clear();
+            ushort index = 0;
+            foreach (var item in Translator.getLanguages())
+            {
+                selectionBox.Items.Add(item + " to Morse");
+                selectionBox.Items.Add("Morse to " + item);
+                if (item == "International") selectionBox.SelectedIndex = index;
+                else index += 2;
+            }
+        }
+
+        private void UserControl_Translator_Leave(object sender, EventArgs e)
+        {
+            inputBox.Text = "";
+        }
+
         private void button_Enter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -87,11 +105,11 @@ namespace Morse_Translator
         {
             if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0)
             {
-                outputBox.Text = Translator.languageToMorse(inputBox.Text.ToUpper());
+                outputBox.Text = translator.languageToMorse(inputBox.Text.ToUpper());
             }
             else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0)
             {
-                outputBox.Text = Translator.morseToLanguage(inputBox.Text.ToUpper());
+                outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper());
             }
             else MessageBox.Show("Please select a type.", "Error");
 
@@ -124,8 +142,8 @@ namespace Morse_Translator
                 playThread = new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
-                    if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0) Translator.playMorseAsSound(outputBox);
-                    else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0) Translator.playMorseAsSound(inputBox);
+                    if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0) translator.playMorseAsSound(outputBox);
+                    else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0) translator.playMorseAsSound(inputBox);
                     inputBox.ReadOnly = false;
                     exchangeButton.Enabled = true;
                     clearButton.Enabled = true;
@@ -157,9 +175,13 @@ namespace Morse_Translator
         private void inputBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = Char.ToUpper(e.KeyChar);
-            if (selectionBox.SelectedIndex % 2 != 0 && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != (char)Keys.Space)
+            if (selectionBox.SelectedIndex < 0)
             {
-                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
+                e.Handled = true;
+                MessageBox.Show("Моля изберете език", "Error");
+            }
+            else if (selectionBox.SelectedIndex % 2 != 0 && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != (char)Keys.Space)
+            {
                 e.Handled = true;
             }
         }
@@ -173,11 +195,11 @@ namespace Morse_Translator
         {
             if (selectionBox.SelectedIndex % 2 != 0)
             {
-                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
+                translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
             }
             else if (selectionBox.SelectedIndex % 2 == 0)
             {
-                Translator.loadData(selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
+                translator.loadData(selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
             }
             inputBox.Focus();
             this.Translate();
