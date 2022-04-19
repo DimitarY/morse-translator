@@ -34,10 +34,10 @@
             this.minimizeBtn = new System.Windows.Forms.PictureBox();
             this.closeBtn = new System.Windows.Forms.PictureBox();
             this.leftPanel = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.trainerButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.homeButton = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.translatorButton = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
             this.decorationPanel = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
@@ -100,16 +100,49 @@
             // 
             // leftPanel
             // 
-            this.leftPanel.Controls.Add(this.button4);
+            this.leftPanel.Controls.Add(this.trainerButton);
             this.leftPanel.Controls.Add(this.button3);
-            this.leftPanel.Controls.Add(this.button2);
-            this.leftPanel.Controls.Add(this.homeButton);
+            this.leftPanel.Controls.Add(this.button4);
+            this.leftPanel.Controls.Add(this.translatorButton);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 40);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(160, 460);
             this.leftPanel.TabIndex = 7;
             this.leftPanel.TabStop = true;
+            // 
+            // trainerButton
+            // 
+            this.trainerButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trainerButton.FlatAppearance.BorderSize = 0;
+            this.trainerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.trainerButton.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trainerButton.ForeColor = System.Drawing.Color.White;
+            this.trainerButton.Location = new System.Drawing.Point(0, 160);
+            this.trainerButton.Name = "trainerButton";
+            this.trainerButton.Size = new System.Drawing.Size(160, 80);
+            this.trainerButton.TabIndex = 2;
+            this.trainerButton.Text = "Trainer";
+            this.trainerButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.trainerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.trainerButton.UseVisualStyleBackColor = true;
+            this.trainerButton.Click += new System.EventHandler(this.trainerButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(0, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(160, 80);
+            this.button3.TabIndex = 0;
+            this.button3.Text = "BUTTON3";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -127,54 +160,22 @@
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // translatorButton
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 160);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(160, 80);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "BUTTON3";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(0, 80);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(160, 80);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "BUTTON2";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // homeButton
-            // 
-            this.homeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.homeButton.FlatAppearance.BorderSize = 0;
-            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.homeButton.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.homeButton.ForeColor = System.Drawing.Color.White;
-            this.homeButton.Location = new System.Drawing.Point(0, 0);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(160, 80);
-            this.homeButton.TabIndex = 0;
-            this.homeButton.Text = "Home";
-            this.homeButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.homeButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.homeButton.UseVisualStyleBackColor = true;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
+            this.translatorButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.translatorButton.FlatAppearance.BorderSize = 0;
+            this.translatorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.translatorButton.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.translatorButton.ForeColor = System.Drawing.Color.White;
+            this.translatorButton.Location = new System.Drawing.Point(0, 80);
+            this.translatorButton.Name = "translatorButton";
+            this.translatorButton.Size = new System.Drawing.Size(160, 80);
+            this.translatorButton.TabIndex = 1;
+            this.translatorButton.Text = "Translator";
+            this.translatorButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.translatorButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.translatorButton.UseVisualStyleBackColor = true;
+            this.translatorButton.Click += new System.EventHandler(this.translaorButton_Click);
             // 
             // centerPanel
             // 
@@ -231,8 +232,8 @@
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button homeButton;
+        private System.Windows.Forms.Button trainerButton;
+        private System.Windows.Forms.Button translatorButton;
         private System.Windows.Forms.Panel centerPanel;
         private System.Windows.Forms.Panel decorationPanel;
     }

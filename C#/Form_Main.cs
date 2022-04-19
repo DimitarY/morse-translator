@@ -49,7 +49,7 @@ namespace Morse_Translator
 
         private void Main_Load(object sender, EventArgs e)
         {
-            loadUserControls();
+            
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -76,50 +76,38 @@ namespace Morse_Translator
             this.Close();
         }
 
-        private void loadUserControls()
+        private void menuChange()
         {
-            Panel clearPanel = new Panel();
-            clearPanel.Size = new Size(centerPanel.Width, centerPanel.Height);
-            clearPanel.BackColor = Color.FromArgb(41, 44, 51);
+            centerPanel.Controls.Clear();
 
-            if (!centerPanel.Controls.Contains(clearPanel))
-            {
-                centerPanel.Controls.Add(clearPanel);
-            }
+            translatorButton.Font = new Font("Century Gothic", (float)10.8, FontStyle.Regular);
+            trainerButton.Font = new Font("Century Gothic", (float)10.8, FontStyle.Regular);
 
-            if (!centerPanel.Controls.Contains(UserControl_Translator.Instance))
-            {
-                centerPanel.Controls.Add(UserControl_Translator.Instance);
-                UserControl_Translator.Instance.Dock = DockStyle.Fill;
-            }
-
-            //if (!centerPanel.Controls.Contains(UserControl_Hire.Instance))
-            //{
-            //    centerPanel.Controls.Add(UserControl_Hire.Instance);
-            //    UserControl_Hire.Instance.Dock = DockStyle.Fill;
-            //}
-
-            //if (!centerPanel.Controls.Contains(UserControl_ReleaseEmployee.Instance))
-            //{
-            //    centerPanel.Controls.Add(UserControl_ReleaseEmployee.Instance);
-            //    UserControl_ReleaseEmployee.Instance.Dock = DockStyle.Fill;
-            //}
-
-            //if (!centerPanel.Controls.Contains(UserControl_UpdateEmployee.Instance))
-            //{
-            //    centerPanel.Controls.Add(UserControl_UpdateEmployee.Instance);
-            //    UserControl_UpdateEmployee.Instance.Dock = DockStyle.Fill;
-            //}
-
-            clearPanel.BringToFront();
+            System.GC.Collect();
         }
 
-        private void homeButton_Click(object sender, EventArgs e)
+        private void translaorButton_Click(object sender, EventArgs e)
         {
+            menuChange();
             Button btn = (Button)sender;
             btn.Font = new Font("Century Gothic", (float)10.8, FontStyle.Underline);
+
+            centerPanel.Controls.Add(UserControl_Translator.Instance);
+            UserControl_Translator.Instance.Dock = DockStyle.Fill;
             UserControl_Translator.Instance.BringToFront();
             UserControl_Translator.Instance.Focus();
+        }
+
+        private void trainerButton_Click(object sender, EventArgs e)
+        {
+            menuChange();
+            Button btn = (Button)sender;
+            btn.Font = new Font("Century Gothic", (float)10.8, FontStyle.Underline);
+
+            centerPanel.Controls.Add(UserControl_Trainer.Instance);
+            UserControl_Trainer.Instance.Dock = DockStyle.Fill;
+            UserControl_Trainer.Instance.BringToFront();
+            UserControl_Trainer.Instance.Focus();
         }
     }
 }
