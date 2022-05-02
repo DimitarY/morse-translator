@@ -192,6 +192,7 @@ namespace Morse_Translator
         public String languageToMorse(string input)
         {
             string temp = "", result = "";
+            List<String> data = new List<String>();
 
             for (int i = 0; i < input.Length; i++)
             {
@@ -202,7 +203,7 @@ namespace Morse_Translator
                 }
                 else if (input[i] == 'S' && i >= 2 && input[i - 1] == 'O' && input[i - 2] == 'S')
                 {
-                    temp = temp.Remove(temp.Length - 10);
+                    data.RemoveRange(data.Count - 2, 2);
                     temp += "...---...";
                 }
                 else if (input[i] == '\n') temp += input[i];
@@ -218,18 +219,25 @@ namespace Morse_Translator
                             break;
                         }
                     }
-                    if (!done) temp += "(unknown)";
+                    if (!done) temp += "(unknown) ";
                 }
 
                 temp += "  ";
+                data.Add(temp);
+                temp = "";
             }
 
             // Clean up code so is human readable
-            for (int i = 0; i < temp.Length; i++)
+            foreach (var item in data)
             {
-                result += temp[i];
-                if (temp[i] == '.' || temp[i] == '-') result += ' ';
-                else if (temp[i] == '\n') i += 2;
+                string buffer = "";
+                for (int i = 0; i < item.Length; i++)
+                {
+                    buffer += item[i];
+                    if (item[i] == '.' || item[i] == '-') buffer += ' ';
+                    else if (item[i] == '\n') i += 2;
+                }
+                result += buffer;
             }
 
             return result;
