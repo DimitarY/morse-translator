@@ -349,9 +349,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-# Custon rulls
-copyJSON.bat
-бележки.txt
-
 # Advanced Installer
 Morse Translator-cache/
