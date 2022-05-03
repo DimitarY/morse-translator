@@ -54,7 +54,7 @@
             this.topPanel.Controls.Add(this.closeBtn);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(750, 32);
             this.topPanel.TabIndex = 6;
@@ -80,7 +80,7 @@
             this.minimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.minimizeBtn.Image = global::Morse_Translator.Properties.Resources.minimize;
             this.minimizeBtn.Location = new System.Drawing.Point(690, 2);
-            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.minimizeBtn.Name = "minimizeBtn";
             this.minimizeBtn.Size = new System.Drawing.Size(27, 29);
             this.minimizeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -94,7 +94,7 @@
             this.closeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.closeBtn.Image = global::Morse_Translator.Properties.Resources.close;
             this.closeBtn.Location = new System.Drawing.Point(720, 2);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(27, 29);
             this.closeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -110,7 +110,7 @@
             this.leftPanel.Controls.Add(this.translatorButton);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 32);
-            this.leftPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leftPanel.Margin = new System.Windows.Forms.Padding(2);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(120, 374);
             this.leftPanel.TabIndex = 7;
@@ -124,7 +124,7 @@
             this.trainerButton.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trainerButton.ForeColor = System.Drawing.Color.White;
             this.trainerButton.Location = new System.Drawing.Point(0, 130);
-            this.trainerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.trainerButton.Margin = new System.Windows.Forms.Padding(2);
             this.trainerButton.Name = "trainerButton";
             this.trainerButton.Size = new System.Drawing.Size(120, 65);
             this.trainerButton.TabIndex = 2;
@@ -142,7 +142,7 @@
             this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 65);
             this.button3.TabIndex = 0;
@@ -159,7 +159,7 @@
             this.button4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Location = new System.Drawing.Point(0, 195);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 65);
             this.button4.TabIndex = 3;
@@ -176,7 +176,7 @@
             this.translatorButton.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.translatorButton.ForeColor = System.Drawing.Color.White;
             this.translatorButton.Location = new System.Drawing.Point(0, 65);
-            this.translatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.translatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.translatorButton.Name = "translatorButton";
             this.translatorButton.Size = new System.Drawing.Size(120, 65);
             this.translatorButton.TabIndex = 1;
@@ -190,7 +190,7 @@
             // 
             this.centerPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.centerPanel.Location = new System.Drawing.Point(122, 32);
-            this.centerPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.centerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.centerPanel.Name = "centerPanel";
             this.centerPanel.Size = new System.Drawing.Size(628, 374);
             this.centerPanel.TabIndex = 8;
@@ -202,7 +202,7 @@
             this.decorationPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.decorationPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.decorationPanel.Location = new System.Drawing.Point(120, 32);
-            this.decorationPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.decorationPanel.Margin = new System.Windows.Forms.Padding(2);
             this.decorationPanel.Name = "decorationPanel";
             this.decorationPanel.Size = new System.Drawing.Size(2, 374);
             this.decorationPanel.TabIndex = 9;
@@ -221,7 +221,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
