@@ -224,7 +224,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main";
+            this.Text = "Morse Translator";
             this.Load += new System.EventHandler(this.Main_Load);
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
