@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using NAudio.Wave;
+using System.Threading;
 
 namespace Morse_Translator
 {
@@ -243,21 +245,37 @@ namespace Morse_Translator
             return result;
         }
 
-        public void playMorseAsSound(RichTextBox richTextBox)
+        public void playMorseAsSound(string text, ushort frequency = 550, ushort wpm = 20)
         {
             try
             {
-                bool status = richTextBox.Enabled;
-                richTextBox.Enabled = false;
+                ushort delay = (ushort)(((double)(60 / wpm) / 50) * 800);
 
-                foreach (var item in richTextBox.Text)
+                WaveOut waveOut = new WaveOut();
+                SineWaveProvider32 sineWaveProvider = new SineWaveProvider32(frequency);
+                sineWaveProvider.SetWaveFormat(16000, 1); // 16kHz mono
+
+                waveOut.Init(sineWaveProvider);
+
+                foreach (var item in text)
                 {
-                    if (item == '.') Console.Beep(550, 100);
-                    else if (item == '-') Console.Beep(550, 300);
-                    else Task.Delay(300);
+                    if (item == '.')
+                    {
+                        waveOut.Play();
+                        Thread.Sleep(delay);
+                    }
+                    else if (item == '-')
+                    {
+                        waveOut.Play();
+                        Thread.Sleep(delay * 3);
+                    }
+                    else Thread.Sleep(delay);
+
+                    waveOut.Stop();
                 }
 
-                richTextBox.Enabled = status;
+                waveOut.Dispose();
+                System.GC.Collect();
             }
             catch (Exception)
             {
