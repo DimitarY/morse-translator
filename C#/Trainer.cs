@@ -35,9 +35,9 @@ namespace Morse_Translator
             symbols.Clear();
             codes.Clear();
 
-            translator.loadData("Bulgarian");
-            List<Translator> grammar = translator.Grammar;
-            foreach (Translator symbol in grammar)
+            translator.loadGrammar("Bulgarian");
+            List<Language> grammar = translator.Grammar;
+            foreach (Language symbol in grammar)
             {
                 this.symbols.Add(symbol.Symbol);
                 this.codes.Add(symbol.Code);

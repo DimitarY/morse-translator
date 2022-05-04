@@ -58,33 +58,20 @@ namespace Morse_Translator
             Image img = exchangeButton.Image;
             img.RotateFlip(RotateFlipType.Rotate90FlipNone);
             exchangeButton.Image = img;
-
-            ushort index = 0;
-            foreach (var item in Translator.getLanguages())
-            {
-                selectionBox.Items.Add(item + " to Morse");
-                selectionBox.Items.Add("Morse to " + item);
-                if (item == "International") selectionBox.SelectedIndex = index;
-                else index += 2;
-            }
         }
 
         private void UserControl_Translator_Enter(object sender, EventArgs e)
         {
+            inputBox.Text = "";
             selectionBox.Items.Clear();
             ushort index = 0;
-            foreach (var item in Translator.getLanguages())
+            foreach (var item in Language.getLanguages())
             {
                 selectionBox.Items.Add(item + " to Morse");
                 selectionBox.Items.Add("Morse to " + item);
                 if (item == "International") selectionBox.SelectedIndex = index;
                 else index += 2;
             }
-        }
-
-        private void UserControl_Translator_Leave(object sender, EventArgs e)
-        {
-            inputBox.Text = "";
         }
 
         private void button_Enter(object sender, EventArgs e)
@@ -116,38 +103,38 @@ namespace Morse_Translator
             System.GC.Collect();
         }
 
-        private void clearButton_Click(object sender, EventArgs e)
-        {
-            inputBox.Clear();
-        }
+        private void clearButton_Click(object sender, EventArgs e) { inputBox.Clear(); }
 
         private void playButton_Click(object sender, EventArgs e)
         {
             if (playThread.IsAlive)
             {
-                inputBox.ReadOnly = false;
-                exchangeButton.Enabled = true;
-                clearButton.Enabled = true;
-                selectionBox.Enabled = true;
+                //inputBox.ReadOnly = false;
+                //exchangeButton.Enabled = true;
+                //clearButton.Enabled = true;
+                //selectionBox.Enabled = true;
                 playButton.Image = Properties.Resources.play_button;
                 playThread.Abort();
             }
             else
             {
-                inputBox.ReadOnly = true;
-                exchangeButton.Enabled = false;
-                clearButton.Enabled = false;
-                selectionBox.Enabled = false;
+                //inputBox.ReadOnly = true;
+                //exchangeButton.Enabled = false;
+                //clearButton.Enabled = false;
+                //selectionBox.Enabled = false;
+                int selectionIndex = selectionBox.SelectedIndex;
+                string inBox = inputBox.Text, outBox = outputBox.Text;
+
                 playButton.Image = Properties.Resources.stop_button;
                 playThread = new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
-                    if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 == 0) translator.playMorseAsSound(outputBox);
-                    else if (selectionBox.SelectedIndex >= 0 && selectionBox.SelectedIndex % 2 != 0) translator.playMorseAsSound(inputBox);
-                    inputBox.ReadOnly = false;
-                    exchangeButton.Enabled = true;
-                    clearButton.Enabled = true;
-                    selectionBox.Enabled = true;
+                    if (selectionIndex >= 0 && selectionIndex % 2 == 0) translator.playMorseAsSound(outBox);
+                    else if (selectionIndex >= 0 && selectionIndex % 2 != 0) translator.playMorseAsSound(inBox);
+                    //inputBox.ReadOnly = false;
+                    //exchangeButton.Enabled = true;
+                    //clearButton.Enabled = true;
+                    //selectionBox.Enabled = true;
                     playButton.Image = Properties.Resources.play_button;
                     Cursor.Position = Cursor.Position;
                 });
@@ -195,11 +182,11 @@ namespace Morse_Translator
         {
             if (selectionBox.SelectedIndex % 2 != 0)
             {
-                translator.loadData(selectionBox.SelectedItem.ToString().Remove(0, 9));
+                translator.loadGrammar(selectionBox.SelectedItem.ToString().Remove(0, 9));
             }
             else if (selectionBox.SelectedIndex % 2 == 0)
             {
-                translator.loadData(selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
+                translator.loadGrammar(selectionBox.SelectedItem.ToString().Remove(selectionBox.SelectedItem.ToString().Length - 9));
             }
             inputBox.Focus();
             this.Translate();

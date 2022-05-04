@@ -11,20 +11,16 @@ using System.Threading;
 
 namespace Morse_Translator
 {
-    internal class Translator
+    internal class Language
     {
-        // The space between symbols(dots and dashes) of the same letter is 1 time unit.
-        // The space between letters is 3 time units.
-        // The space between words is 7 time units.
-
-        private static Translator instance = null;
-        public static Translator Instance
+        private static Language instance = null;
+        public static Language Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new Translator();
+                    instance = new Language();
                 }
                 return instance;
             }
@@ -34,11 +30,9 @@ namespace Morse_Translator
 
         private char symbol;
         private string code;
-        private List<Translator> grammar = new List<Translator>();
 
         public char Symbol { get { return this.symbol; } set { this.symbol = value; } }
         public string Code { get { return this.code; } set { this.code = value; } }
-        public List<Translator> Grammar { get { return this.grammar; } }
 
         public static List<string> getLanguages()
         {
@@ -69,33 +63,36 @@ namespace Morse_Translator
             return result;
         }
 
-        public void loadData(string language)
+        public List<Language> getGramar(string language)
         {
             try
             {
-                grammar.Clear();
+                List<Language> grammar = new List<Language>();
+                // TODO: трябва да се направи така че обекта да не си създава сам "grammar"
                 string json;
 
                 using (StreamReader r = new StreamReader(path + "/JSON/" + language + ".json"))
                 {
                     json = r.ReadToEnd();
 
-                    grammar.AddRange(JsonConvert.DeserializeObject<List<Translator>>(json));
+                    grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
 
                 using (StreamReader r = new StreamReader(path + "/JSON/Numbers.json"))
                 {
                     json = r.ReadToEnd();
 
-                    grammar.AddRange(JsonConvert.DeserializeObject<List<Translator>>(json));
+                    grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
 
                 using (StreamReader r = new StreamReader(path + "/JSON/Symbols.json"))
                 {
                     json = r.ReadToEnd();
 
-                    grammar.AddRange(JsonConvert.DeserializeObject<List<Translator>>(json));
+                    grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
+
+                return grammar;
             }
             catch (System.IO.DirectoryNotFoundException)
             {
@@ -109,7 +106,37 @@ namespace Morse_Translator
             {
                 throw;
             }
+
+            return null;
         }
+    }
+
+    internal class Translator
+    {
+        // The space between symbols(dots and dashes) of the same letter is 1 time unit.
+        // The space between letters is 3 time units.
+        // The space between words is 7 time units.
+
+        private static Translator instance = null;
+        public static Translator Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Translator();
+                }
+                return instance;
+            }
+        }
+
+        private Language language = Language.Instance;
+
+        private List<Language> grammar = new List<Language>();
+
+        public List<Language> Grammar { get { return this.grammar; } }
+
+        public void loadGrammar(string s_language) { grammar = language.getGramar(s_language); }
 
         private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type
         {
@@ -176,7 +203,7 @@ namespace Morse_Translator
                 }
 
                 bool done = false;
-                foreach (Translator symbol in grammar)
+                foreach (Language symbol in grammar)
                 {
                     if (symbol.Code == item)
                     {
@@ -185,7 +212,7 @@ namespace Morse_Translator
                         break;
                     }
                 }
-                if (!done) result += "(unknown)";
+                if (!done) result += "(unknown) ";
             }
 
             return result;
@@ -212,7 +239,7 @@ namespace Morse_Translator
                 else
                 {
                     bool done = false;
-                    foreach (Translator symbol in grammar)
+                    foreach (Language symbol in grammar)
                     {
                         if (symbol.Symbol == input[i])
                         {

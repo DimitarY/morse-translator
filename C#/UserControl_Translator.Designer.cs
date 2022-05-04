@@ -170,7 +170,6 @@
             this.Size = new System.Drawing.Size(838, 460);
             this.Load += new System.EventHandler(this.UserControl_Translator_Load);
             this.Enter += new System.EventHandler(this.UserControl_Translator_Enter);
-            this.Leave += new System.EventHandler(this.UserControl_Translator_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.exchangeButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playButton)).EndInit();
             this.ResumeLayout(false);
