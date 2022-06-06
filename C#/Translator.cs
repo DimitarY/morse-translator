@@ -78,6 +78,7 @@ namespace Morse_Translator
                     grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
 
+                //TODO: при липса на файловете дава грешка
                 using (StreamReader r = new StreamReader(path + "/JSON/Numbers.json"))
                 {
                     json = r.ReadToEnd();
@@ -97,16 +98,24 @@ namespace Morse_Translator
             catch (System.IO.DirectoryNotFoundException)
             {
                 MessageBox.Show("Необходимите файлове не можаха да бъдат намерени.", "Error");
+                throw;
             }
             catch (Newtonsoft.Json.JsonReaderException)
             {
                 MessageBox.Show("Проблем в четенето на JSON файловете.\nЛипстващ елемент.", "Error");
+                throw;
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("Един или няколко JSON файловете не бяха намерени.", "Error");
+                throw;
             }
             catch (Exception)
             {
                 throw;
             }
 
+            //TODO: tova e greshno. trqbva da se vgradi v grewkite
             return null;
         }
     }
@@ -133,6 +142,8 @@ namespace Morse_Translator
         private Language language = Language.Instance;
 
         private List<Language> grammar = new List<Language>();
+
+        private WaveOut waveOut = new WaveOut();
 
         public List<Language> Grammar { get { return this.grammar; } }
 
@@ -272,17 +283,21 @@ namespace Morse_Translator
             return result;
         }
 
+        public void setWaveOut(ushort frequency = 550)
+        {
+            SineWaveProvider32 sineWaveProvider = new SineWaveProvider32(500);
+            sineWaveProvider.SetWaveFormat(16000, 1); // 16kHz mono
+
+            waveOut.Init(sineWaveProvider);
+        }
+
         public void playMorseAsSound(string text, ushort frequency = 550, ushort wpm = 20)
         {
             try
             {
                 ushort delay = (ushort)(((double)(60 / wpm) / 50) * 800);
 
-                WaveOut waveOut = new WaveOut();
-                SineWaveProvider32 sineWaveProvider = new SineWaveProvider32(frequency);
-                sineWaveProvider.SetWaveFormat(16000, 1); // 16kHz mono
-
-                waveOut.Init(sineWaveProvider);
+                if (frequency != 550) setWaveOut(frequency);
 
                 foreach (var item in text)
                 {
@@ -301,7 +316,6 @@ namespace Morse_Translator
                     waveOut.Stop();
                 }
 
-                waveOut.Dispose();
                 System.GC.Collect();
             }
             catch (Exception)
