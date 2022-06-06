@@ -145,6 +145,8 @@ namespace Morse_Translator
         private void exchangeButton_Click(object sender, EventArgs e)
         {
             inputBox.Text = outputBox.Text;
+            inputBox.Select(inputBox.Text.Length, 0);
+            inputBox.ScrollToCaret();
             this.Translate();
             if (selectionBox.SelectedIndex % 2 != 0) selectionBox.SelectedIndex = (int)selectionBox.SelectedIndex - 1;
             else if (selectionBox.SelectedIndex % 2 == 0) selectionBox.SelectedIndex = (int)selectionBox.SelectedIndex + 1;
