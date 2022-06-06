@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="19.2" version="19.4" Modules="simple" RootPath="." Language="en" Id="{74840762-F679-43D2-8365-1C950DCD8DDB}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="19.2" version="19.5" Modules="simple" RootPath="." Language="en" Id="{74840762-F679-43D2-8365-1C950DCD8DDB}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
-    <ROW Name="HiddenItems" Value="ActSyncAppComponent;AutorunComponent;CPLAppletComponent;GameUxComponent;SilverlightSlnComponent;AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiXDiffComponent;MsixManifestEditorComponent"/>
+    <ROW Name="HiddenItems" Value="AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiXDiffComponent;MsixManifestEditorComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_CURRENT_YEAR" Value="2022" ValueLocId="-"/>
-    <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 19.4 build 4648ec91" ValueLocId="-"/>
+    <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 19.5 build 36301275" ValueLocId="-"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="dimitar.yordanov11@outlook.com"/>
@@ -16,7 +16,7 @@
     <ROW Property="ProductCode" Value="1033:{49140776-CAB2-44D9-9CA1-9F4ADE1A9F4B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Morse Translator"/>
-    <ROW Property="ProductVersion" Value="0.3.2.2"/>
+    <ROW Property="ProductVersion" Value="0.3.3.0"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{75E4D1CC-607A-45D3-897D-63F93C9514F3}"/>
@@ -42,8 +42,15 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{6C63862A-C10A-4FCC-8CDD-F7FFB505AF18}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="Bulgarian.json" ComponentId="{5120F6EC-2553-4378-805E-E723767B3455}" Directory_="JSON_Dir" Attributes="0" KeyPath="Bulgarian.json" Type="0"/>
+    <ROW Component="International.json" ComponentId="{82D501AC-94E5-46D5-AC82-BBED8135D1C0}" Directory_="JSON_Dir" Attributes="0" KeyPath="International.json" Type="0"/>
     <ROW Component="MorseTranslator.exe" ComponentId="{C1FA776C-EAFF-416D-9C45-64437CB2980E}" Directory_="APPDIR" Attributes="0" KeyPath="MorseTranslator.exe"/>
+    <ROW Component="NAudio.Asio.dll" ComponentId="{87ED2951-F724-43C6-BD8E-15196DEFBE77}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Asio.dll"/>
+    <ROW Component="NAudio.Core.dll" ComponentId="{EFFFEAC4-9CF2-4B12-BD88-3DC6806748F7}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Core.dll"/>
+    <ROW Component="NAudio.Midi.dll" ComponentId="{3E7DFCE7-7EAF-469D-82E7-6601669BFD6A}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Midi.dll"/>
+    <ROW Component="NAudio.Wasapi.dll" ComponentId="{635D691C-5A04-4B34-A41C-36F1763A01E3}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Wasapi.dll"/>
+    <ROW Component="NAudio.WinForms.dll" ComponentId="{6986E678-D143-42A9-B360-C7B908ACEB06}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.WinForms.dll"/>
+    <ROW Component="NAudio.WinMM.dll" ComponentId="{AA53FFC4-D505-4CD3-A22F-F71C667DCA5D}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.WinMM.dll"/>
+    <ROW Component="NAudio.dll" ComponentId="{EE6831D0-5001-4809-8451-AE08817F41A2}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.dll"/>
     <ROW Component="Newtonsoft.Json.dll" ComponentId="{D57DFC0F-CE5D-4EDE-B8F7-23915E783F72}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{7B634E9B-96AB-4A59-B8BD-DB34B86C23D5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{08F8DD44-C82B-4217-9D1D-928EE10A3CAC}" Directory_="SHORTCUTDIR" Attributes="0"/>
@@ -54,11 +61,17 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="MorseTranslator.exe" Component_="MorseTranslator.exe" FileName="MORSET~1.EXE|Morse Translator.exe" Attributes="0" SourcePath="..\C#\bin\Release\Morse Translator.exe" SelfReg="false" DigSign="true"/>
-    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\C#\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll" SelfReg="false"/>
-    <ROW File="Bulgarian.json" Component_="Bulgarian.json" FileName="BULGAR~1.JSO|Bulgarian.json" Attributes="0" SourcePath="..\JSON\Bulgarian.json" SelfReg="false"/>
-    <ROW File="International.json" Component_="Bulgarian.json" FileName="INTERN~1.JSO|International.json" Attributes="0" SourcePath="..\JSON\International.json" SelfReg="false"/>
-    <ROW File="Numbers.json" Component_="Bulgarian.json" FileName="NUMBER~1.JSO|Numbers.json" Attributes="0" SourcePath="..\JSON\Numbers.json" SelfReg="false"/>
-    <ROW File="Symbols.json" Component_="Bulgarian.json" FileName="SYMBOL~1.JSO|Symbols.json" Attributes="0" SourcePath="..\JSON\Symbols.json" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\C#\bin\Release\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="NAudio.Asio.dll" Component_="NAudio.Asio.dll" FileName="NAUDIO~1.DLL|NAudio.Asio.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.Asio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Core.dll" Component_="NAudio.Core.dll" FileName="NAUDIO~2.DLL|NAudio.Core.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.Core.dll" SelfReg="false"/>
+    <ROW File="NAudio.dll" Component_="NAudio.dll" FileName="NAudio.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Midi.dll" Component_="NAudio.Midi.dll" FileName="NAUDIO~3.DLL|NAudio.Midi.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.Midi.dll" SelfReg="false"/>
+    <ROW File="NAudio.Wasapi.dll" Component_="NAudio.Wasapi.dll" FileName="NAUDIO~4.DLL|NAudio.Wasapi.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.Wasapi.dll" SelfReg="false"/>
+    <ROW File="NAudio.WinForms.dll" Component_="NAudio.WinForms.dll" FileName="NAUDIO~5.DLL|NAudio.WinForms.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.WinForms.dll" SelfReg="false"/>
+    <ROW File="NAudio.WinMM.dll" Component_="NAudio.WinMM.dll" FileName="NAUDIO~6.DLL|NAudio.WinMM.dll" Attributes="0" SourcePath="..\C#\bin\Release\NAudio.WinMM.dll" SelfReg="false"/>
+    <ROW File="International.json" Component_="International.json" FileName="INTERN~1.JSO|International.json" Attributes="0" SourcePath="..\..\morse-translator-API\JSON\International.json" SelfReg="false"/>
+    <ROW File="Numbers.json" Component_="International.json" FileName="NUMBER~1.JSO|Numbers.json" Attributes="0" SourcePath="..\..\morse-translator-API\JSON\Numbers.json" SelfReg="false"/>
+    <ROW File="Symbols.json" Component_="International.json" FileName="SYMBOL~1.JSO|Symbols.json" Attributes="0" SourcePath="..\..\morse-translator-API\JSON\Symbols.json" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -137,7 +150,14 @@
     <ROW Feature_="MainFeature" Component_="MorseTranslator.exe"/>
     <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
     <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
-    <ROW Feature_="MainFeature" Component_="Bulgarian.json"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Asio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Midi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Wasapi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.WinForms.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.WinMM.dll"/>
+    <ROW Feature_="MainFeature" Component_="International.json"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="morsecode.exe" SourcePath="..\C#\Resources\morse-code.ico" Index="0"/>
