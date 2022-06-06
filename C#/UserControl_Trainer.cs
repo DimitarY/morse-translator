@@ -30,7 +30,7 @@ namespace Morse_Translator
 
         private void UserControl_Trainer_Load(object sender, EventArgs e)
         {
-            trainer.LoadData();
+            trainer.LoadData("International");
         }
     }
 }
