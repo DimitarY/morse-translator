@@ -1,13 +1,11 @@
-﻿using System;
+﻿using NAudio.Wave;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Windows.Forms;
-using NAudio.Wave;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Morse_Translator
 {
