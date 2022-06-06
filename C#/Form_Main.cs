@@ -49,7 +49,7 @@ namespace Morse_Translator
 
         private void Main_Load(object sender, EventArgs e)
         {
-            
+            //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -66,15 +66,9 @@ namespace Morse_Translator
             }
         }
 
-        private void minimizeBtn_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
+        private void minimizeButton_Click(object sender, EventArgs e) { this.WindowState = FormWindowState.Minimized; }
 
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void closeButton_Click(object sender, EventArgs e) { this.Close(); }
 
         private void menuChange()
         {
@@ -108,6 +102,18 @@ namespace Morse_Translator
             UserControl_Trainer.Instance.Dock = DockStyle.Fill;
             UserControl_Trainer.Instance.BringToFront();
             UserControl_Trainer.Instance.Focus();
+        }
+
+        private void Button_Enter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.ForeColor = Color.FromArgb(62, 120, 138);
+        }
+
+        private void Button_Leave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.ForeColor = Color.White;
         }
     }
 }

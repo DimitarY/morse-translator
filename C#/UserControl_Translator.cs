@@ -47,6 +47,8 @@ namespace Morse_Translator
         {
             InitializeComponent();
 
+            exchangeButton.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
             translator = Translator.Instance;
         }
 
@@ -54,10 +56,6 @@ namespace Morse_Translator
         {
             inputBox.BringToFront();
             outputBox.BringToFront();
-
-            Image img = exchangeButton.Image;
-            img.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            exchangeButton.Image = img;
         }
 
         private void UserControl_Translator_Enter(object sender, EventArgs e)
@@ -103,8 +101,15 @@ namespace Morse_Translator
             System.GC.Collect();
         }
 
-        private void clearButton_Click(object sender, EventArgs e) { inputBox.Clear(); }
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            inputBox.Clear();
+            inputBox.Focus();
 
+            System.GC.Collect();
+        }
+
+        //TODO: проблем при заключване на конторлите по време на възпроизвеждането
         private void playButton_Click(object sender, EventArgs e)
         {
             if (playThread.IsAlive)
@@ -113,8 +118,9 @@ namespace Morse_Translator
                 //exchangeButton.Enabled = true;
                 //clearButton.Enabled = true;
                 //selectionBox.Enabled = true;
-                playButton.Image = Properties.Resources.play_button;
+                playButton.BackgroundImage = Properties.Resources.play_button;
                 playThread.Abort();
+                translator.setWaveOut();
             }
             else
             {
@@ -125,7 +131,7 @@ namespace Morse_Translator
                 int selectionIndex = selectionBox.SelectedIndex;
                 string inBox = inputBox.Text, outBox = outputBox.Text;
 
-                playButton.Image = Properties.Resources.stop_button;
+                playButton.BackgroundImage = Properties.Resources.stop_button;
                 playThread = new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
@@ -135,11 +141,13 @@ namespace Morse_Translator
                     //exchangeButton.Enabled = true;
                     //clearButton.Enabled = true;
                     //selectionBox.Enabled = true;
-                    playButton.Image = Properties.Resources.play_button;
+                    playButton.BackgroundImage = Properties.Resources.play_button;
                     Cursor.Position = Cursor.Position;
                 });
                 playThread.Start();
             }
+
+            System.GC.Collect();
         }
 
         private void exchangeButton_Click(object sender, EventArgs e)

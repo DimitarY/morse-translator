@@ -31,33 +31,31 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.topPanel = new System.Windows.Forms.Panel();
             this.topPanelLabel = new System.Windows.Forms.Label();
-            this.minimizeBtn = new System.Windows.Forms.PictureBox();
-            this.closeBtn = new System.Windows.Forms.PictureBox();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.trainerButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.translatorButton = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
+            this.minimizeBtn = new System.Windows.Forms.Button();
             this.decorationPanel = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minimizeBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).BeginInit();
             this.leftPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // topPanel
             // 
-            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.topPanel.BackColor = System.Drawing.Color.White;
+            this.topPanel.Controls.Add(this.closeButton);
             this.topPanel.Controls.Add(this.topPanelLabel);
             this.topPanel.Controls.Add(this.minimizeBtn);
-            this.topPanel.Controls.Add(this.closeBtn);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(750, 32);
-            this.topPanel.TabIndex = 6;
+            this.topPanel.TabIndex = 3;
             this.topPanel.TabStop = true;
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
             // 
@@ -70,37 +68,9 @@
             this.topPanelLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.topPanelLabel.Name = "topPanelLabel";
             this.topPanelLabel.Size = new System.Drawing.Size(212, 29);
-            this.topPanelLabel.TabIndex = 0;
+            this.topPanelLabel.TabIndex = 2;
             this.topPanelLabel.Text = "Morse Translator";
             this.topPanelLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
-            // 
-            // minimizeBtn
-            // 
-            this.minimizeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.minimizeBtn.Image = global::Morse_Translator.Properties.Resources.minimize;
-            this.minimizeBtn.Location = new System.Drawing.Point(690, 2);
-            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.minimizeBtn.Name = "minimizeBtn";
-            this.minimizeBtn.Size = new System.Drawing.Size(27, 29);
-            this.minimizeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.minimizeBtn.TabIndex = 1;
-            this.minimizeBtn.TabStop = false;
-            this.minimizeBtn.Click += new System.EventHandler(this.minimizeBtn_Click);
-            // 
-            // closeBtn
-            // 
-            this.closeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.closeBtn.Image = global::Morse_Translator.Properties.Resources.close;
-            this.closeBtn.Location = new System.Drawing.Point(720, 2);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(27, 29);
-            this.closeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.closeBtn.TabIndex = 0;
-            this.closeBtn.TabStop = false;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // leftPanel
             // 
@@ -113,7 +83,7 @@
             this.leftPanel.Margin = new System.Windows.Forms.Padding(2);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(120, 374);
-            this.leftPanel.TabIndex = 7;
+            this.leftPanel.TabIndex = 0;
             this.leftPanel.TabStop = true;
             // 
             // trainerButton
@@ -133,6 +103,10 @@
             this.trainerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.trainerButton.UseVisualStyleBackColor = true;
             this.trainerButton.Click += new System.EventHandler(this.trainerButton_Click);
+            this.trainerButton.Enter += new System.EventHandler(this.Button_Enter);
+            this.trainerButton.Leave += new System.EventHandler(this.Button_Leave);
+            this.trainerButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.trainerButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // button3
             // 
@@ -150,6 +124,10 @@
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Enter += new System.EventHandler(this.Button_Enter);
+            this.button3.Leave += new System.EventHandler(this.Button_Leave);
+            this.button3.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.button3.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // button4
             // 
@@ -167,6 +145,10 @@
             this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Enter += new System.EventHandler(this.Button_Enter);
+            this.button4.Leave += new System.EventHandler(this.Button_Leave);
+            this.button4.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.button4.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // translatorButton
             // 
@@ -185,6 +167,10 @@
             this.translatorButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.translatorButton.UseVisualStyleBackColor = true;
             this.translatorButton.Click += new System.EventHandler(this.translaorButton_Click);
+            this.translatorButton.Enter += new System.EventHandler(this.Button_Enter);
+            this.translatorButton.Leave += new System.EventHandler(this.Button_Leave);
+            this.translatorButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.translatorButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // centerPanel
             // 
@@ -193,8 +179,36 @@
             this.centerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.centerPanel.Name = "centerPanel";
             this.centerPanel.Size = new System.Drawing.Size(628, 374);
-            this.centerPanel.TabIndex = 8;
+            this.centerPanel.TabIndex = 1;
             this.centerPanel.TabStop = true;
+            // 
+            // closeButton
+            // 
+            this.closeButton.BackgroundImage = global::Morse_Translator.Properties.Resources.close;
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.closeButton.FlatAppearance.BorderSize = 0;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Location = new System.Drawing.Point(720, 1);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(27, 29);
+            this.closeButton.TabIndex = 1;
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // minimizeBtn
+            // 
+            this.minimizeBtn.BackgroundImage = global::Morse_Translator.Properties.Resources.minimize;
+            this.minimizeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.minimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minimizeBtn.FlatAppearance.BorderSize = 0;
+            this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeBtn.Location = new System.Drawing.Point(687, 1);
+            this.minimizeBtn.Name = "minimizeBtn";
+            this.minimizeBtn.Size = new System.Drawing.Size(27, 29);
+            this.minimizeBtn.TabIndex = 0;
+            this.minimizeBtn.UseVisualStyleBackColor = true;
+            this.minimizeBtn.Click += new System.EventHandler(this.minimizeButton_Click);
             // 
             // decorationPanel
             // 
@@ -228,8 +242,6 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minimizeBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).EndInit();
             this.leftPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -239,8 +251,6 @@
 
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label topPanelLabel;
-        private System.Windows.Forms.PictureBox minimizeBtn;
-        private System.Windows.Forms.PictureBox closeBtn;
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
@@ -248,5 +258,7 @@
         private System.Windows.Forms.Button translatorButton;
         private System.Windows.Forms.Panel centerPanel;
         private System.Windows.Forms.Panel decorationPanel;
+        private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button minimizeBtn;
     }
 }
