@@ -141,9 +141,6 @@ namespace Morse_Translator
 
         private List<Language> grammar = new List<Language>();
 
-        private WaveOut waveOut = new WaveOut();
-        private SineWaveProvider32 sineWaveProvider = new SineWaveProvider32();
-
         public List<Language> Grammar { get { return this.grammar; } }
 
         public void loadGrammar(string s_language) { grammar = language.getGramar(s_language); }
@@ -280,48 +277,6 @@ namespace Morse_Translator
             }
 
             return result;
-        }
-
-        public void setWaveOut(ushort frequency = 550)
-        {
-            this.sineWaveProvider.Frequency = frequency;
-            this.sineWaveProvider.SetWaveFormat(16000, 1); // 16kHz mono
-
-            this.waveOut.Dispose();
-            this.waveOut.Init(sineWaveProvider);
-        }
-
-        public void playMorseAsSound(string text, ushort frequency = 550, ushort wpm = 20)
-        {
-            try
-            {
-                ushort delay = (ushort)(((double)(60 / wpm) / 50) * 800);
-
-                if (frequency != 550) setWaveOut(frequency);
-
-                foreach (var item in text)
-                {
-                    if (item == '.')
-                    {
-                        this.waveOut.Play();
-                        Thread.Sleep(delay);
-                    }
-                    else if (item == '-')
-                    {
-                        this.waveOut.Play();
-                        Thread.Sleep(delay * 3);
-                    }
-                    else Thread.Sleep(delay);
-
-                    this.waveOut.Stop();
-                }
-
-                System.GC.Collect();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Morse_Translator
         [STAThread]
         static void Main()
         {
-            Translator translator = Translator.Instance;
-            translator.setWaveOut();
+            Sound sound = Sound.Instance;
+            sound.setWaveOut();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -32,6 +32,7 @@ namespace Morse_Translator
         }
 
         private Translator translator;
+        private Sound sound;
         private Thread playThread = new Thread(() =>
         {
             Thread.CurrentThread.IsBackground = true;
@@ -44,6 +45,7 @@ namespace Morse_Translator
             exchangeButton.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             translator = Translator.Instance;
+            sound = Sound.Instance;
         }
 
         private void UserControl_Translator_Load(object sender, EventArgs e)
@@ -114,7 +116,7 @@ namespace Morse_Translator
                 //selectionBox.Enabled = true;
                 playButton.BackgroundImage = Properties.Resources.play_button;
                 playThread.Abort();
-                translator.setWaveOut();
+                sound.setWaveOut();
             }
             else
             {
@@ -129,8 +131,8 @@ namespace Morse_Translator
                 playThread = new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
-                    if (selectionIndex >= 0 && selectionIndex % 2 == 0) translator.playMorseAsSound(outBox);
-                    else if (selectionIndex >= 0 && selectionIndex % 2 != 0) translator.playMorseAsSound(inBox);
+                    if (selectionIndex >= 0 && selectionIndex % 2 == 0) sound.playMorseAsSound(outBox);
+                    else if (selectionIndex >= 0 && selectionIndex % 2 != 0) sound.playMorseAsSound(inBox);
                     //inputBox.ReadOnly = false;
                     //exchangeButton.Enabled = true;
                     //clearButton.Enabled = true;
