@@ -70,16 +70,14 @@ namespace Morse_Translator
 
         private void button_Enter(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.Silver;
-            btn.ForeColor = Color.Black;
+            (sender as Button).BackColor = Color.Silver;
+            (sender as Button).ForeColor = Color.Black;
         }
 
         private void button_Leave(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.FromArgb(255, 255, 255);
-            btn.ForeColor = Color.FromArgb(62, 120, 138);
+            (sender as Button).BackColor = Color.FromArgb(255, 255, 255);
+            (sender as Button).ForeColor = Color.FromArgb(62, 120, 138);
         }
 
         private void Translate()

@@ -141,8 +141,6 @@ namespace Morse_Translator
 
         private List<Language> grammar = new List<Language>();
 
-        public List<Language> Grammar { get { return this.grammar; } }
-
         public void loadGrammar(string s_language) { grammar = language.getGramar(s_language); }
 
         private List<string> removeSpaceFromMorse(string input) // Convert Morse code from human type to computer type

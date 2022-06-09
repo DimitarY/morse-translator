@@ -16,8 +16,8 @@ namespace Morse_Translator
                 return instance;
             }
         }
-
-        private Translator translator = Translator.Instance;
+        
+        private Language language = Language.Instance;
 
         private List<char> symbols = new List<char>();
         private List<string> codes = new List<string>();
@@ -28,18 +28,22 @@ namespace Morse_Translator
         public ushort MaxLength { get { return this.maxLength; } }
 
 
-        public void LoadData(string language)
+        public void LoadData(string s_language, bool getNumbers = true, bool getSymbols = true)
         {
             symbols.Clear();
             codes.Clear();
 
-            translator.loadGrammar(language);
-            foreach (Language symbol in translator.Grammar)
+            foreach (Language symbol in language.getGramar(s_language))
             {
+                if (char.IsDigit(symbol.Symbol) && !getNumbers) continue;
+                else if (!char.IsDigit(symbol.Symbol) && !char.IsLetter(symbol.Symbol) && !getSymbols) continue;
+
                 this.symbols.Add(symbol.Symbol);
                 this.codes.Add(symbol.Code);
+
             }
 
+            this.maxLength = 0;
             // Clean up code so is human readable
             for (int i = 0; i < this.codes.Count; i++)
             {
@@ -51,7 +55,7 @@ namespace Morse_Translator
                     else if (codes[i][j] == '\n') i += 2;
                 }
                 codes[i] = buffer;
-                if (codes[i].Length > maxLength) maxLength = (ushort)codes[i].Length;
+                if (codes[i].Length > this.maxLength) this.maxLength = (ushort)codes[i].Length;
             }
         }
     }
