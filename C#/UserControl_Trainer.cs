@@ -37,8 +37,6 @@ namespace Morse_Translator
 
             trainer = Trainer.Instance;
             sound = Sound.Instance;
-
-            LoadPanelsSizeAndData();
         }
 
         private void UserControl_Trainer_Load(object sender, EventArgs e)
@@ -136,6 +134,8 @@ namespace Morse_Translator
             }
 
             bottomPanel1.Visible = false ? bottomPanel1.Visible = true : bottomPanel1.Visible = true;
+
+            System.GC.Collect();
         }
 
         private void SelectionChanged(object sender, EventArgs e)
