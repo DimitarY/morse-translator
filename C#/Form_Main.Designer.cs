@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.topPanel = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
             this.topPanelLabel = new System.Windows.Forms.Label();
+            this.minimizeBtn = new System.Windows.Forms.Button();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.trainerButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.translatorButton = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.minimizeBtn = new System.Windows.Forms.Button();
             this.decorationPanel = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -59,6 +59,20 @@
             this.topPanel.TabStop = true;
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
             // 
+            // closeButton
+            // 
+            this.closeButton.BackgroundImage = global::Morse_Translator.Properties.Resources.close;
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.closeButton.FlatAppearance.BorderSize = 0;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Location = new System.Drawing.Point(720, 1);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(27, 29);
+            this.closeButton.TabIndex = 1;
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // topPanelLabel
             // 
             this.topPanelLabel.AutoSize = true;
@@ -71,6 +85,20 @@
             this.topPanelLabel.TabIndex = 2;
             this.topPanelLabel.Text = "Morse Translator";
             this.topPanelLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
+            // 
+            // minimizeBtn
+            // 
+            this.minimizeBtn.BackgroundImage = global::Morse_Translator.Properties.Resources.minimize;
+            this.minimizeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.minimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minimizeBtn.FlatAppearance.BorderSize = 0;
+            this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeBtn.Location = new System.Drawing.Point(687, 1);
+            this.minimizeBtn.Name = "minimizeBtn";
+            this.minimizeBtn.Size = new System.Drawing.Size(27, 29);
+            this.minimizeBtn.TabIndex = 0;
+            this.minimizeBtn.UseVisualStyleBackColor = true;
+            this.minimizeBtn.Click += new System.EventHandler(this.minimizeButton_Click);
             // 
             // leftPanel
             // 
@@ -181,34 +209,6 @@
             this.centerPanel.Size = new System.Drawing.Size(628, 374);
             this.centerPanel.TabIndex = 1;
             this.centerPanel.TabStop = true;
-            // 
-            // closeButton
-            // 
-            this.closeButton.BackgroundImage = global::Morse_Translator.Properties.Resources.close;
-            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.closeButton.FlatAppearance.BorderSize = 0;
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.Location = new System.Drawing.Point(720, 1);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(27, 29);
-            this.closeButton.TabIndex = 1;
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
-            // minimizeBtn
-            // 
-            this.minimizeBtn.BackgroundImage = global::Morse_Translator.Properties.Resources.minimize;
-            this.minimizeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.minimizeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.minimizeBtn.FlatAppearance.BorderSize = 0;
-            this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minimizeBtn.Location = new System.Drawing.Point(687, 1);
-            this.minimizeBtn.Name = "minimizeBtn";
-            this.minimizeBtn.Size = new System.Drawing.Size(27, 29);
-            this.minimizeBtn.TabIndex = 0;
-            this.minimizeBtn.UseVisualStyleBackColor = true;
-            this.minimizeBtn.Click += new System.EventHandler(this.minimizeButton_Click);
             // 
             // decorationPanel
             // 
