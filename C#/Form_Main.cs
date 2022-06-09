@@ -71,6 +71,7 @@ namespace Morse_Translator
 
             translatorButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
             trainerButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
+            settingsButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
 
             System.GC.Collect();
         }
@@ -95,6 +96,17 @@ namespace Morse_Translator
             UserControl_Trainer.Instance.Dock = DockStyle.Fill;
             UserControl_Trainer.Instance.BringToFront();
             UserControl_Trainer.Instance.Focus();
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            menuChange();
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+
+            centerPanel.Controls.Add(UserControl_Settings.Instance);
+            UserControl_Settings.Instance.Dock = DockStyle.Fill;
+            UserControl_Settings.Instance.BringToFront();
+            UserControl_Settings.Instance.Focus();
         }
 
         private void Button_Enter(object sender, EventArgs e)

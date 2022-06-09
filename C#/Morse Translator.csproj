@@ -93,6 +93,12 @@
     <Compile Include="Sound.cs" />
     <Compile Include="Trainer.cs" />
     <Compile Include="Translator.cs" />
+    <Compile Include="UserControl_Settings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_Settings.Designer.cs">
+      <DependentUpon>UserControl_Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl_Trainer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControl_Settings.resx">
+      <DependentUpon>UserControl_Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl_Trainer.resx">
       <DependentUpon>UserControl_Trainer.cs</DependentUpon>
     </EmbeddedResource>

@@ -36,7 +36,7 @@
             this.leftPanel = new System.Windows.Forms.Panel();
             this.trainerButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.settingsButton = new System.Windows.Forms.Button();
             this.translatorButton = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
             this.decorationPanel = new System.Windows.Forms.Panel();
@@ -104,7 +104,7 @@
             // 
             this.leftPanel.Controls.Add(this.trainerButton);
             this.leftPanel.Controls.Add(this.button3);
-            this.leftPanel.Controls.Add(this.button4);
+            this.leftPanel.Controls.Add(this.settingsButton);
             this.leftPanel.Controls.Add(this.translatorButton);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 32);
@@ -157,26 +157,27 @@
             this.button3.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.button3.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // button4
+            // settingsButton
             // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(0, 195);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 65);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "BUTTON4";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Enter += new System.EventHandler(this.Button_Enter);
-            this.button4.Leave += new System.EventHandler(this.Button_Leave);
-            this.button4.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.button4.MouseLeave += new System.EventHandler(this.Button_Leave);
+            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.settingsButton.FlatAppearance.BorderSize = 0;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsButton.ForeColor = System.Drawing.Color.White;
+            this.settingsButton.Location = new System.Drawing.Point(0, 195);
+            this.settingsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(120, 65);
+            this.settingsButton.TabIndex = 3;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.settingsButton.Enter += new System.EventHandler(this.Button_Enter);
+            this.settingsButton.Leave += new System.EventHandler(this.Button_Leave);
+            this.settingsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.settingsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // translatorButton
             // 
@@ -252,7 +253,7 @@
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label topPanelLabel;
         private System.Windows.Forms.Panel leftPanel;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button trainerButton;
         private System.Windows.Forms.Button translatorButton;
