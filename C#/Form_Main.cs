@@ -44,6 +44,7 @@ namespace Morse_Translator
         private void Main_Load(object sender, EventArgs e)
         {
             //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
+            // при страт да се провери за всички езици
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -68,8 +69,8 @@ namespace Morse_Translator
         {
             centerPanel.Controls.Clear();
 
-            translatorButton.Font = new Font("Century Gothic", (float)10.8, FontStyle.Regular);
-            trainerButton.Font = new Font("Century Gothic", (float)10.8, FontStyle.Regular);
+            translatorButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
+            trainerButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
 
             System.GC.Collect();
         }
@@ -77,8 +78,7 @@ namespace Morse_Translator
         private void translaorButton_Click(object sender, EventArgs e)
         {
             menuChange();
-            Button btn = (Button)sender;
-            btn.Font = new Font("Century Gothic", (float)10.8, FontStyle.Underline);
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
 
             centerPanel.Controls.Add(UserControl_Translator.Instance);
             UserControl_Translator.Instance.Dock = DockStyle.Fill;
@@ -89,8 +89,7 @@ namespace Morse_Translator
         private void trainerButton_Click(object sender, EventArgs e)
         {
             menuChange();
-            Button btn = (Button)sender;
-            btn.Font = new Font("Century Gothic", (float)10.8, FontStyle.Underline);
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
 
             centerPanel.Controls.Add(UserControl_Trainer.Instance);
             UserControl_Trainer.Instance.Dock = DockStyle.Fill;
@@ -100,14 +99,12 @@ namespace Morse_Translator
 
         private void Button_Enter(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            btn.ForeColor = Color.FromArgb(62, 120, 138);
+            (sender as Button).ForeColor = Color.FromArgb(62, 120, 138);
         }
 
         private void Button_Leave(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            btn.ForeColor = Color.White;
+            (sender as Button).ForeColor = Color.White;
         }
     }
 }
