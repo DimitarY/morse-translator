@@ -67,8 +67,6 @@ namespace Morse_Translator
 
         private void menuChange()
         {
-            centerPanel.Controls.Clear();
-
             translatorButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
             trainerButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
             settingsButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
@@ -77,36 +75,54 @@ namespace Morse_Translator
         }
 
         private void translaorButton_Click(object sender, EventArgs e)
-        {
-            menuChange();
-            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+        {            
+            if (!centerPanel.Controls.Contains(UserControl_Translator.Instance))
+            {
+                centerPanel.Controls.Add(UserControl_Translator.Instance);
+                UserControl_Translator.Instance.Dock = DockStyle.Fill;
+            }
 
-            centerPanel.Controls.Add(UserControl_Translator.Instance);
-            UserControl_Translator.Instance.Dock = DockStyle.Fill;
-            UserControl_Translator.Instance.BringToFront();
-            UserControl_Translator.Instance.Focus();
+            if (centerPanel.Controls[0].Name != "UserControl_Translator")
+            {
+                UserControl_Translator.Instance.BringToFront();
+                UserControl_Translator.Instance.Focus();
+                menuChange();
+                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+            }
         }
 
         private void trainerButton_Click(object sender, EventArgs e)
         {
-            menuChange();
-            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+            if (!centerPanel.Controls.Contains(UserControl_Trainer.Instance))
+            {
+                centerPanel.Controls.Add(UserControl_Trainer.Instance);
+                UserControl_Trainer.Instance.Dock = DockStyle.Fill;
+            }
 
-            centerPanel.Controls.Add(UserControl_Trainer.Instance);
-            UserControl_Trainer.Instance.Dock = DockStyle.Fill;
-            UserControl_Trainer.Instance.BringToFront();
-            UserControl_Trainer.Instance.Focus();
+            if (centerPanel.Controls[0].Name != "UserControl_Trainer")
+            {
+                UserControl_Trainer.Instance.BringToFront();
+                UserControl_Trainer.Instance.Focus();
+                menuChange();
+                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+            }
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            menuChange();
-            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+            if (!centerPanel.Controls.Contains(UserControl_Settings.Instance))
+            {
+                centerPanel.Controls.Add(UserControl_Settings.Instance);
+                UserControl_Settings.Instance.Dock = DockStyle.Fill;
+            }
 
-            centerPanel.Controls.Add(UserControl_Settings.Instance);
-            UserControl_Settings.Instance.Dock = DockStyle.Fill;
-            UserControl_Settings.Instance.BringToFront();
-            UserControl_Settings.Instance.Focus();
+            if (centerPanel.Controls[0].Name != "UserControl_Settings")
+            {
+                UserControl_Settings.Instance.BringToFront();
+                UserControl_Settings.Instance.Focus();
+                menuChange();
+                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
+            }
         }
 
         private void Button_Enter(object sender, EventArgs e)
