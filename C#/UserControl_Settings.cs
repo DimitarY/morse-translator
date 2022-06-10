@@ -27,6 +27,7 @@ namespace Morse_Translator
         public UserControl_Settings()
         {
             InitializeComponent();
+            
             sound = Sound.Instance;
         }
 
@@ -37,7 +38,21 @@ namespace Morse_Translator
 
         private void UserControl_Trainer_Enter(object sender, EventArgs e)
         {
-            
+            textBoxFrequency.Text = sound.Frequency.ToString();
+            textBoxWords_Per_Minute.Text = sound.WPM.ToString();
+            textBoxControl_Word.Text = sound.CodeWord.ToString();
+        }
+
+        private void NumbersOnlytextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar)) e.Handled = true;
+        }
+
+        private void updateSoundButton_Click(object sender, EventArgs e)
+        {
+            sound.Frequency = ushort.Parse(textBoxFrequency.Text);
+            sound.WPM = ushort.Parse(textBoxWords_Per_Minute.Text);
+            sound.CodeWord = textBoxControl_Word.Text;
         }
     }
 }

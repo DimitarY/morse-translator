@@ -22,6 +22,8 @@ namespace Morse_Translator
         private WaveOut waveOut = new WaveOut();
         private SineWaveProvider32 sineWaveProvider = new SineWaveProvider32();
 
+        private Translator translator = Translator.Instance;
+
         private ushort frequency = 550;
         private ushort wpm = 20;
         private string codeWord = "PARIS";
@@ -44,8 +46,7 @@ namespace Morse_Translator
         {
             try
             {
-                //TODO: да се замени 50 с преведения брой символи на codeWord
-                ushort delay = (ushort)(((double)(60 / this.wpm) / 50) * 800);
+                ushort delay = (ushort)(((double)(60 / this.wpm) / translator.languageToMorse(this.codeWord + " ").Length) * 700); // 50ms = ~0,3 sec
 
                 if (this.frequency != 550) setWaveOut();
 
