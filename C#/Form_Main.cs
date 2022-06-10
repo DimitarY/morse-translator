@@ -74,21 +74,19 @@ namespace Morse_Translator
             System.GC.Collect();
         }
 
+        //TODO: не зарежда евента Enter при първи старт
         private void translaorButton_Click(object sender, EventArgs e)
-        {            
+        {
             if (!centerPanel.Controls.Contains(UserControl_Translator.Instance))
             {
                 centerPanel.Controls.Add(UserControl_Translator.Instance);
                 UserControl_Translator.Instance.Dock = DockStyle.Fill;
             }
 
-            if (centerPanel.Controls[0].Name != "UserControl_Translator")
-            {
-                UserControl_Translator.Instance.BringToFront();
-                UserControl_Translator.Instance.Focus();
-                menuChange();
-                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
-            }
+            UserControl_Translator.Instance.BringToFront();
+            UserControl_Translator.Instance.Focus();
+            menuChange();
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
         }
 
         private void trainerButton_Click(object sender, EventArgs e)
@@ -99,13 +97,10 @@ namespace Morse_Translator
                 UserControl_Trainer.Instance.Dock = DockStyle.Fill;
             }
 
-            if (centerPanel.Controls[0].Name != "UserControl_Trainer")
-            {
-                UserControl_Trainer.Instance.BringToFront();
-                UserControl_Trainer.Instance.Focus();
-                menuChange();
-                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
-            }
+            UserControl_Trainer.Instance.BringToFront();
+            UserControl_Trainer.Instance.Focus();
+            menuChange();
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -116,13 +111,10 @@ namespace Morse_Translator
                 UserControl_Settings.Instance.Dock = DockStyle.Fill;
             }
 
-            if (centerPanel.Controls[0].Name != "UserControl_Settings")
-            {
-                UserControl_Settings.Instance.BringToFront();
-                UserControl_Settings.Instance.Focus();
-                menuChange();
-                (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
-            }
+            UserControl_Settings.Instance.BringToFront();
+            UserControl_Settings.Instance.Focus();
+            menuChange();
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
         }
 
         private void Button_Enter(object sender, EventArgs e)
