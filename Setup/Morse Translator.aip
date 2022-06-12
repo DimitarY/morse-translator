@@ -10,13 +10,12 @@
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="dimitar.yordanov11@outlook.com"/>
-    <ROW Property="ARPPRODUCTICON" Value="morsecode.exe" Type="8"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="DLG"/>
     <ROW Property="ProductCode" Value="1033:{49140776-CAB2-44D9-9CA1-9F4ADE1A9F4B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Morse Translator"/>
-    <ROW Property="ProductVersion" Value="0.4.0.0"/>
+    <ROW Property="ProductVersion" Value="0.5.0.0"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{75E4D1CC-607A-45D3-897D-63F93C9514F3}"/>
@@ -160,7 +159,7 @@
     <ROW Feature_="MainFeature" Component_="International.json"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="morsecode.exe" SourcePath="..\C#\Resources\morse-code.ico" Index="0"/>
+    <ROW Name="MorseTranslator.exe" SourcePath="..\C#\Resources\morse-code.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -192,8 +191,8 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="MorseTranslator.exe" Directory_="SHORTCUTDIR" Name="MORSET~1.EXE|Morse Translator.exe" Component_="MorseTranslator.exe" Target="[#MorseTranslator.exe]" Description="Morse Translator.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="MorseTranslator.exe_1" Directory_="DesktopFolder" Name="MORSET~1.EXE|Morse Translator.exe" Component_="MorseTranslator.exe" Target="[#MorseTranslator.exe]" Description="Morse Translator.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="MorseTranslator" Directory_="SHORTCUTDIR" Name="MORSET~1|Morse Translator" Component_="MorseTranslator.exe" Target="[#MorseTranslator.exe]" Hotkey="0" Icon_="MorseTranslator.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="MorseTranslator_1" Directory_="DesktopFolder" Name="MORSET~1|Morse Translator" Component_="MorseTranslator.exe" Target="[#MorseTranslator.exe]" Hotkey="0" Icon_="MorseTranslator.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
