@@ -36,13 +36,24 @@ namespace Morse_Translator
         private const int WM_POPUPSYSTEMMENU = 0x313;
         // END
 
+        private Sound sound;
+        private Settings settings;       
+
         public Form_Main()
         {
             InitializeComponent();
+
+            sound = Sound.Instance;
+            settings = Settings.Instance;
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
+            settings.startUp();
+            settings.loadSound();
+
+            sound.setWaveOut();
+
             //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
             // при страт да се провери за всички езици
         }

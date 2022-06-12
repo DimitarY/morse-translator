@@ -19,7 +19,7 @@ namespace Morse_Translator
             }
         }
 
-        private WaveOut waveOut = new WaveOut();
+        private WaveOut waveOut;
         private SineWaveProvider32 sineWaveProvider = new SineWaveProvider32();
 
         private Translator translator = Translator.Instance;
@@ -32,13 +32,13 @@ namespace Morse_Translator
         public ushort WPM { get { return this.wpm; } set { this.wpm = value; } }
         public string CodeWord { get { return this.codeWord; } set { this.codeWord = value; } }
 
-
         public void setWaveOut()
         {
             this.sineWaveProvider.Frequency = this.frequency;
             this.sineWaveProvider.SetWaveFormat(16000, 1); // 16kHz mono
 
-            this.waveOut.Dispose();
+            if (this.waveOut != null) this.waveOut.Dispose();
+            this.waveOut = new WaveOut();
             this.waveOut.Init(sineWaveProvider);
         }
 
@@ -47,8 +47,6 @@ namespace Morse_Translator
             try
             {
                 ushort delay = (ushort)(((double)(60 / this.wpm) / translator.languageToMorse(this.codeWord + " ").Length) * 700); // 50ms = ~0,3 sec
-
-                if (this.frequency != 550) setWaveOut();
 
                 foreach (var item in text)
                 {
