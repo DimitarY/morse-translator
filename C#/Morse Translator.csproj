@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_Worker.cs" />
     <Compile Include="Form_Main.cs">
       <SubType>Form</SubType>
     </Compile>
