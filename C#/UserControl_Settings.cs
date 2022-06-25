@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Drawing;
-using System.Linq;
-using System.Threading;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Morse_Translator
@@ -24,18 +22,20 @@ namespace Morse_Translator
 
         private Sound sound;
         private Settings settings;
+        private API_Worker api;
 
         public UserControl_Settings()
         {
             InitializeComponent();
-            
+
             sound = Sound.Instance;
             settings = Settings.Instance;
+            api = API_Worker.Instance;
         }
 
         private void UserControl_Trainer_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void UserControl_Trainer_Enter(object sender, EventArgs e)
@@ -43,9 +43,11 @@ namespace Morse_Translator
             comboBoxFrequency.Text = sound.Frequency.ToString();
             comboBoxWords_Per_Minute.Text = sound.WPM.ToString();
             textBoxControl_Word.Text = sound.CodeWord.ToString();
+            this.updateLanguageList();
         }
 
-        private void NumbersOnlytextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //TODO: не работи
+        private void NumbersOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar == (char)Keys.Return && e.KeyChar == (char)Keys.Back) e.Handled = true;
         }
@@ -83,6 +85,51 @@ namespace Morse_Translator
             this.updateSoundButton_Click(sender, e);
 
             MessageBox.Show("Sound settings reset to default.", "Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void updateLanguageList()
+        {
+            languagesListBox.Items.Clear();
+            List<String> apiLanguages = api.getLanguages();
+
+
+            //TODO: има лек лаг докато проверява дали може да свали данни от сървъра (когато сървъра не е онлайн или не може да се дотъпи)
+            if (apiLanguages != null)
+            {
+                foreach (var item in apiLanguages)
+                {
+                    if (Language.getLanguages().Contains(item)) languagesListBox.Items.Add(item, true);
+                    else languagesListBox.Items.Add(item);
+                }
+                languagesListBox.Enabled = true;
+            }
+            else
+            {
+                foreach (var item in Language.getLanguages())
+                {
+                    languagesListBox.Items.Add(item, true);
+                }
+
+                languagesListBox.Enabled = false;
+            }
+        }
+
+        private void updateLanguagesButton_Click(object sender, EventArgs e)
+        {
+            List<String> languages = new List<String>();
+            foreach (var item in languagesListBox.CheckedItems)
+            {
+                languages.Add(item.ToString());
+            }
+
+            api.downloadLanguages(languages);
+            this.updateLanguageList();
+        }
+
+        private void downloadAllLanguagesButton_Click(object sender, EventArgs e)
+        {
+            api.downloadLanguages(null);
+            this.updateLanguageList();
         }
     }
 }

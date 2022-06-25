@@ -33,12 +33,18 @@
             this.textBoxControl_Word = new System.Windows.Forms.TextBox();
             this.labelControl_Word = new System.Windows.Forms.Label();
             this.sountPanel = new System.Windows.Forms.Panel();
-            this.updateSoundButton = new System.Windows.Forms.Button();
-            this.resetSoundButton = new System.Windows.Forms.Button();
-            this.soundPanelLabel = new System.Windows.Forms.Label();
-            this.comboBoxFrequency = new System.Windows.Forms.ComboBox();
             this.comboBoxWords_Per_Minute = new System.Windows.Forms.ComboBox();
+            this.comboBoxFrequency = new System.Windows.Forms.ComboBox();
+            this.soundPanelLabel = new System.Windows.Forms.Label();
+            this.resetSoundButton = new System.Windows.Forms.Button();
+            this.updateSoundButton = new System.Windows.Forms.Button();
+            this.languagesListBox = new System.Windows.Forms.CheckedListBox();
+            this.languagesPanel = new System.Windows.Forms.Panel();
+            this.downloadAllLanguagesButton = new System.Windows.Forms.Button();
+            this.updateLanguagesButton = new System.Windows.Forms.Button();
+            this.languagesPanelLabel = new System.Windows.Forms.Label();
             this.sountPanel.SuspendLayout();
+            this.languagesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelFrequency
@@ -100,22 +106,49 @@
             this.sountPanel.Size = new System.Drawing.Size(250, 160);
             this.sountPanel.TabIndex = 0;
             // 
-            // updateSoundButton
+            // comboBoxWords_Per_Minute
             // 
-            this.updateSoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.updateSoundButton.BackColor = System.Drawing.Color.White;
-            this.updateSoundButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateSoundButton.FlatAppearance.BorderSize = 0;
-            this.updateSoundButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.updateSoundButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.updateSoundButton.Location = new System.Drawing.Point(162, 122);
-            this.updateSoundButton.Margin = new System.Windows.Forms.Padding(2);
-            this.updateSoundButton.Name = "updateSoundButton";
-            this.updateSoundButton.Size = new System.Drawing.Size(75, 25);
-            this.updateSoundButton.TabIndex = 1;
-            this.updateSoundButton.Text = "Update";
-            this.updateSoundButton.UseVisualStyleBackColor = false;
-            this.updateSoundButton.Click += new System.EventHandler(this.updateSoundButton_Click);
+            this.comboBoxWords_Per_Minute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxWords_Per_Minute.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxWords_Per_Minute.FormattingEnabled = true;
+            this.comboBoxWords_Per_Minute.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60"});
+            this.comboBoxWords_Per_Minute.Location = new System.Drawing.Point(137, 57);
+            this.comboBoxWords_Per_Minute.Name = "comboBoxWords_Per_Minute";
+            this.comboBoxWords_Per_Minute.Size = new System.Drawing.Size(100, 23);
+            this.comboBoxWords_Per_Minute.TabIndex = 9;
+            this.comboBoxWords_Per_Minute.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumbersOnly_KeyPress);
+            // 
+            // comboBoxFrequency
+            // 
+            this.comboBoxFrequency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxFrequency.FormattingEnabled = true;
+            this.comboBoxFrequency.Items.AddRange(new object[] {
+            "200",
+            "550",
+            "1000"});
+            this.comboBoxFrequency.Location = new System.Drawing.Point(137, 28);
+            this.comboBoxFrequency.Name = "comboBoxFrequency";
+            this.comboBoxFrequency.Size = new System.Drawing.Size(100, 23);
+            this.comboBoxFrequency.TabIndex = 4;
+            this.comboBoxFrequency.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumbersOnly_KeyPress);
+            // 
+            // soundPanelLabel
+            // 
+            this.soundPanelLabel.AutoSize = true;
+            this.soundPanelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.soundPanelLabel.ForeColor = System.Drawing.Color.Gray;
+            this.soundPanelLabel.Location = new System.Drawing.Point(0, 0);
+            this.soundPanelLabel.Name = "soundPanelLabel";
+            this.soundPanelLabel.Size = new System.Drawing.Size(95, 16);
+            this.soundPanelLabel.TabIndex = 8;
+            this.soundPanelLabel.Text = "Sound settings";
             // 
             // resetSoundButton
             // 
@@ -134,53 +167,98 @@
             this.resetSoundButton.UseVisualStyleBackColor = false;
             this.resetSoundButton.Click += new System.EventHandler(this.resetSoundButton_Click);
             // 
-            // soundPanelLabel
+            // updateSoundButton
             // 
-            this.soundPanelLabel.AutoSize = true;
-            this.soundPanelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.soundPanelLabel.ForeColor = System.Drawing.Color.Gray;
-            this.soundPanelLabel.Location = new System.Drawing.Point(0, 0);
-            this.soundPanelLabel.Name = "soundPanelLabel";
-            this.soundPanelLabel.Size = new System.Drawing.Size(95, 16);
-            this.soundPanelLabel.TabIndex = 8;
-            this.soundPanelLabel.Text = "Sound settings";
+            this.updateSoundButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.updateSoundButton.BackColor = System.Drawing.Color.White;
+            this.updateSoundButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.updateSoundButton.FlatAppearance.BorderSize = 0;
+            this.updateSoundButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updateSoundButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateSoundButton.Location = new System.Drawing.Point(162, 122);
+            this.updateSoundButton.Margin = new System.Windows.Forms.Padding(2);
+            this.updateSoundButton.Name = "updateSoundButton";
+            this.updateSoundButton.Size = new System.Drawing.Size(75, 25);
+            this.updateSoundButton.TabIndex = 1;
+            this.updateSoundButton.Text = "Update";
+            this.updateSoundButton.UseVisualStyleBackColor = false;
+            this.updateSoundButton.Click += new System.EventHandler(this.updateSoundButton_Click);
             // 
-            // comboBoxFrequency
+            // languagesListBox
             // 
-            this.comboBoxFrequency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxFrequency.FormattingEnabled = true;
-            this.comboBoxFrequency.Items.AddRange(new object[] {
-            "200",
-            "550",
-            "1000"});
-            this.comboBoxFrequency.Location = new System.Drawing.Point(137, 28);
-            this.comboBoxFrequency.Name = "comboBoxFrequency";
-            this.comboBoxFrequency.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxFrequency.TabIndex = 4;
+            this.languagesListBox.CheckOnClick = true;
+            this.languagesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.languagesListBox.FormattingEnabled = true;
+            this.languagesListBox.HorizontalScrollbar = true;
+            this.languagesListBox.Location = new System.Drawing.Point(18, 31);
+            this.languagesListBox.Name = "languagesListBox";
+            this.languagesListBox.Size = new System.Drawing.Size(214, 89);
+            this.languagesListBox.Sorted = true;
+            this.languagesListBox.TabIndex = 1;
             // 
-            // comboBoxWords_Per_Minute
+            // languagesPanel
             // 
-            this.comboBoxWords_Per_Minute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxWords_Per_Minute.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxWords_Per_Minute.FormattingEnabled = true;
-            this.comboBoxWords_Per_Minute.Items.AddRange(new object[] {
-            "10",
-            "20",
-            "30",
-            "40",
-            "50",
-            "60"});
-            this.comboBoxWords_Per_Minute.Location = new System.Drawing.Point(137, 57);
-            this.comboBoxWords_Per_Minute.Name = "comboBoxWords_Per_Minute";
-            this.comboBoxWords_Per_Minute.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxWords_Per_Minute.TabIndex = 9;
+            this.languagesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.languagesPanel.Controls.Add(this.downloadAllLanguagesButton);
+            this.languagesPanel.Controls.Add(this.updateLanguagesButton);
+            this.languagesPanel.Controls.Add(this.languagesPanelLabel);
+            this.languagesPanel.Controls.Add(this.languagesListBox);
+            this.languagesPanel.Location = new System.Drawing.Point(373, 5);
+            this.languagesPanel.Name = "languagesPanel";
+            this.languagesPanel.Size = new System.Drawing.Size(250, 160);
+            this.languagesPanel.TabIndex = 2;
+            // 
+            // downloadAllLanguagesButton
+            // 
+            this.downloadAllLanguagesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadAllLanguagesButton.BackColor = System.Drawing.Color.White;
+            this.downloadAllLanguagesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadAllLanguagesButton.FlatAppearance.BorderSize = 0;
+            this.downloadAllLanguagesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadAllLanguagesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.downloadAllLanguagesButton.Location = new System.Drawing.Point(18, 122);
+            this.downloadAllLanguagesButton.Margin = new System.Windows.Forms.Padding(2);
+            this.downloadAllLanguagesButton.Name = "downloadAllLanguagesButton";
+            this.downloadAllLanguagesButton.Size = new System.Drawing.Size(106, 25);
+            this.downloadAllLanguagesButton.TabIndex = 10;
+            this.downloadAllLanguagesButton.Text = "Download All";
+            this.downloadAllLanguagesButton.UseVisualStyleBackColor = false;
+            this.downloadAllLanguagesButton.Click += new System.EventHandler(this.downloadAllLanguagesButton_Click);
+            // 
+            // updateLanguagesButton
+            // 
+            this.updateLanguagesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.updateLanguagesButton.BackColor = System.Drawing.Color.White;
+            this.updateLanguagesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.updateLanguagesButton.FlatAppearance.BorderSize = 0;
+            this.updateLanguagesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updateLanguagesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateLanguagesButton.Location = new System.Drawing.Point(157, 122);
+            this.updateLanguagesButton.Margin = new System.Windows.Forms.Padding(2);
+            this.updateLanguagesButton.Name = "updateLanguagesButton";
+            this.updateLanguagesButton.Size = new System.Drawing.Size(75, 25);
+            this.updateLanguagesButton.TabIndex = 10;
+            this.updateLanguagesButton.Text = "Update";
+            this.updateLanguagesButton.UseVisualStyleBackColor = false;
+            this.updateLanguagesButton.Click += new System.EventHandler(this.updateLanguagesButton_Click);
+            // 
+            // languagesPanelLabel
+            // 
+            this.languagesPanelLabel.AutoSize = true;
+            this.languagesPanelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.languagesPanelLabel.ForeColor = System.Drawing.Color.Gray;
+            this.languagesPanelLabel.Location = new System.Drawing.Point(0, 0);
+            this.languagesPanelLabel.Name = "languagesPanelLabel";
+            this.languagesPanelLabel.Size = new System.Drawing.Size(124, 16);
+            this.languagesPanelLabel.TabIndex = 9;
+            this.languagesPanelLabel.Text = "Languages settings";
             // 
             // UserControl_Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.Controls.Add(this.languagesPanel);
             this.Controls.Add(this.sountPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -190,6 +268,8 @@
             this.Enter += new System.EventHandler(this.UserControl_Trainer_Enter);
             this.sountPanel.ResumeLayout(false);
             this.sountPanel.PerformLayout();
+            this.languagesPanel.ResumeLayout(false);
+            this.languagesPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +286,10 @@
         private System.Windows.Forms.Label soundPanelLabel;
         private System.Windows.Forms.ComboBox comboBoxFrequency;
         private System.Windows.Forms.ComboBox comboBoxWords_Per_Minute;
+        private System.Windows.Forms.CheckedListBox languagesListBox;
+        private System.Windows.Forms.Panel languagesPanel;
+        private System.Windows.Forms.Button updateLanguagesButton;
+        private System.Windows.Forms.Label languagesPanelLabel;
+        private System.Windows.Forms.Button downloadAllLanguagesButton;
     }
 }
