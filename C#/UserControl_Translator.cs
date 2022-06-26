@@ -90,7 +90,7 @@ namespace Morse_Translator
             {
                 outputBox.Text = translator.morseToLanguage(inputBox.Text.ToUpper());
             }
-            else MessageBox.Show("Please select a type.", "Error");
+            else MessageBox.Show("Please select a type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             System.GC.Collect();
         }
@@ -169,7 +169,7 @@ namespace Morse_Translator
             if (selectionBox.SelectedIndex < 0)
             {
                 e.Handled = true;
-                MessageBox.Show("Моля изберете език", "Error");
+                MessageBox.Show("Please select a language.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (selectionBox.SelectedIndex % 2 != 0 && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != (char)Keys.Space)
             {
