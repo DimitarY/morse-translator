@@ -25,7 +25,25 @@ namespace Morse_Translator
         }
 
         private static string apiURL = "http://127.0.0.1:5000";
-        private static string jsonPATH = Path.GetFullPath(Directory.GetCurrentDirectory() + "/JSON");
+        private static string jsonPATH = Path.GetFullPath(Directory.GetCurrentDirectory() + "/Languages");
+        private bool available = false;
+
+        public bool Available { get { return this.available; } }
+
+        public bool isAvailable() //TODO: има лек лаг докато проверява дали може да свали данни от сървъра (когато сървъра не е онлайн или не може да се дотъпи)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                if (client.DownloadString(apiURL) != null) return this.available = true;
+                else return this.available = false;
+            }
+            catch (Exception)
+            {
+                return this.available = false;
+                throw;
+            }
+        }
 
         public List<String> getLanguages()
         {
@@ -45,7 +63,6 @@ namespace Morse_Translator
             catch (Exception)
             {
                 return null;
-                throw;
             }
         }
 
@@ -70,7 +87,7 @@ namespace Morse_Translator
                 }
                 else
                 {
-                    var values = new Dictionary<String, List<String>> 
+                    var values = new Dictionary<String, List<String>>
                     {
                         { "languages", newLanguages }
                     };
@@ -86,9 +103,11 @@ namespace Morse_Translator
                         using (var stream = File.Create(jsonPATH + "/languages.zip"))
                         {
                             stream.Write(result, 0, result.Length);
-                        } 
+                        }
                     }
                 }
+
+                if (newLanguages != null) this.removeLanguages(newLanguages);
 
                 using (var zip = ZipFile.OpenRead(jsonPATH + "/languages.zip"))
                 {
@@ -102,14 +121,11 @@ namespace Morse_Translator
                 }
                 File.Delete(jsonPATH + "/languages.zip");
 
-                this.removeLanguages(newLanguages);
-
                 return true;
             }
             catch (Exception)
             {
                 return false;
-                throw;
             }
         }
     }

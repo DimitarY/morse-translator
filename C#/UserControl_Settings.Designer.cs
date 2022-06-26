@@ -264,8 +264,8 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UserControl_Settings";
             this.Size = new System.Drawing.Size(628, 374);
-            this.Load += new System.EventHandler(this.UserControl_Trainer_Load);
-            this.Enter += new System.EventHandler(this.UserControl_Trainer_Enter);
+            this.Load += new System.EventHandler(this.UserControl_Settings_Load);
+            this.Enter += new System.EventHandler(this.UserControl_Settings_Enter);
             this.sountPanel.ResumeLayout(false);
             this.sountPanel.PerformLayout();
             this.languagesPanel.ResumeLayout(false);

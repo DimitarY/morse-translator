@@ -33,16 +33,18 @@ namespace Morse_Translator
             api = API_Worker.Instance;
         }
 
-        private void UserControl_Trainer_Load(object sender, EventArgs e)
+        private void UserControl_Settings_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void UserControl_Trainer_Enter(object sender, EventArgs e)
+        private void UserControl_Settings_Enter(object sender, EventArgs e)
         {
             comboBoxFrequency.Text = sound.Frequency.ToString();
             comboBoxWords_Per_Minute.Text = sound.WPM.ToString();
             textBoxControl_Word.Text = sound.CodeWord.ToString();
+
+            downloadAllLanguagesButton.Enabled = api.Available;
             this.updateLanguageList();
         }
 
@@ -90,18 +92,18 @@ namespace Morse_Translator
         private void updateLanguageList()
         {
             languagesListBox.Items.Clear();
-            List<String> apiLanguages = api.getLanguages();
 
-
-            //TODO: има лек лаг докато проверява дали може да свали данни от сървъра (когато сървъра не е онлайн или не може да се дотъпи)
-            if (apiLanguages != null)
+            if (api.Available)
             {
-                foreach (var item in apiLanguages)
+                List<String> apiLanguages = api.getLanguages();
+                if (apiLanguages != null)
                 {
-                    if (Language.getLanguages().Contains(item)) languagesListBox.Items.Add(item, true);
-                    else languagesListBox.Items.Add(item);
+                    foreach (var item in apiLanguages)
+                    {
+                        if (Language.getLanguages().Contains(item)) languagesListBox.Items.Add(item, true);
+                        else languagesListBox.Items.Add(item);
+                    }
                 }
-                languagesListBox.Enabled = true;
             }
             else
             {
@@ -109,8 +111,6 @@ namespace Morse_Translator
                 {
                     languagesListBox.Items.Add(item, true);
                 }
-
-                languagesListBox.Enabled = false;
             }
         }
 
@@ -122,13 +122,21 @@ namespace Morse_Translator
                 languages.Add(item.ToString());
             }
 
-            api.downloadLanguages(languages);
+            if (api.downloadLanguages(languages)) MessageBox.Show("Languages have been updated.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                if (MessageBox.Show("No connection to server.\nDo you want to delete the unmarked languages.", "Faild", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    api.removeLanguages(languages);
+                    MessageBox.Show("Languages have been removed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
             this.updateLanguageList();
         }
 
         private void downloadAllLanguagesButton_Click(object sender, EventArgs e)
         {
-            api.downloadLanguages(null);
+            if (api.downloadLanguages(null)) MessageBox.Show("Аll languages downloaded successfully.", "Downloaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.updateLanguageList();
         }
     }

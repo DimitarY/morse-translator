@@ -45,14 +45,12 @@ namespace Morse_Translator
 
             sound = Sound.Instance;
             settings = Settings.Instance;
+            API_Worker.Instance.isAvailable();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             settings.startUp();
-            settings.loadSound();
-
-            sound.setWaveOut();
 
             //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
             // при страт да се провери за всички езици
@@ -81,6 +79,10 @@ namespace Morse_Translator
             translatorButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
             trainerButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
             settingsButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
+
+            settings.loadSound();
+
+            sound.setWaveOut();
 
             System.GC.Collect();
         }
@@ -121,7 +123,7 @@ namespace Morse_Translator
                 centerPanel.Controls.Add(UserControl_Settings.Instance);
                 UserControl_Settings.Instance.Dock = DockStyle.Fill;
             }
-
+            API_Worker.Instance.isAvailable();
             UserControl_Settings.Instance.BringToFront();
             UserControl_Settings.Instance.Focus();
             menuChange();
