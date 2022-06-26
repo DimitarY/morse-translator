@@ -16,8 +16,6 @@ namespace Morse_Translator
                 return instance;
             }
         }
-        
-        private Language language = Language.Instance;
 
         private List<char> symbols = new List<char>();
         private List<string> codes = new List<string>();
@@ -33,7 +31,7 @@ namespace Morse_Translator
             symbols.Clear();
             codes.Clear();
 
-            foreach (Language symbol in language.getGramar(s_language))
+            foreach (Language symbol in Language.getGramar(s_language))
             {
                 if (char.IsDigit(symbol.Symbol) && !getNumbers) continue;
                 else if (!char.IsDigit(symbol.Symbol) && !char.IsLetter(symbol.Symbol) && !getSymbols) continue;
