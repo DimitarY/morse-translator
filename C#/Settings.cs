@@ -22,7 +22,7 @@ namespace Morse_Translator
 
         private Sound sound = Sound.Instance;
 
-        private static string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Morse Translator/Settings";
+        private string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Morse Translator/Settings";
 
         public void startUp() //TODO: да се провери дали може да се прави по по-добър начин
         {
@@ -36,7 +36,7 @@ namespace Morse_Translator
         {
             try
             {
-                using (StreamReader r = File.OpenText(Path.Combine(settingsDirectory, "sound.json")))
+                using (StreamReader r = File.OpenText(Path.Combine(this.settingsDirectory, "sound.json")))
                 {
                     string json = r.ReadToEnd();
                     Sound newSound = JsonConvert.DeserializeObject<Sound>(json);
