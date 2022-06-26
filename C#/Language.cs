@@ -20,7 +20,7 @@ namespace Morse_Translator
             }
         }
 
-        private static string path = Path.GetFullPath(Directory.GetCurrentDirectory());
+        private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Morse Translator/Languages";
 
         private char symbol;
         private string code;
@@ -34,7 +34,7 @@ namespace Morse_Translator
 
             try
             {
-                FileInfo[] files = new DirectoryInfo(path + "/Languages").GetFiles("*.json");
+                FileInfo[] files = new DirectoryInfo(path).GetFiles("*.json");
                 foreach (FileInfo file in files)
                 {
                     if (file.Name != "Symbols.json" && file.Name != "Numbers.json") result.Add(file.Name.Remove(file.Name.Length - 5));
@@ -42,7 +42,7 @@ namespace Morse_Translator
             }
             catch (System.IO.DirectoryNotFoundException)
             {
-                Directory.CreateDirectory("Languages");
+                Directory.CreateDirectory(path);
             }
             catch (Exception)
             {
@@ -59,21 +59,21 @@ namespace Morse_Translator
                 List<Language> grammar = new List<Language>();
                 string json;
 
-                using (StreamReader r = new StreamReader(path + "/JSON/" + language + ".json"))
+                using (StreamReader r = new StreamReader(path + $"/{language}.json"))
                 {
                     json = r.ReadToEnd();
 
                     grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
 
-                using (StreamReader r = new StreamReader(path + "/JSON/Numbers.json"))
+                using (StreamReader r = new StreamReader(path + "/Numbers.json"))
                 {
                     json = r.ReadToEnd();
 
                     grammar.AddRange(JsonConvert.DeserializeObject<List<Language>>(json));
                 }
 
-                using (StreamReader r = new StreamReader(path + "/JSON/Symbols.json"))
+                using (StreamReader r = new StreamReader(path + "/Symbols.json"))
                 {
                     json = r.ReadToEnd();
 
