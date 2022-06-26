@@ -49,6 +49,14 @@ namespace Morse_Translator
             }
         }
 
+        public void removeLanguages(List<String> newLanguages)
+        {
+            foreach (var item in Language.getLanguages())
+            {
+                if (!newLanguages.Contains(item)) File.Delete(jsonPATH + $"/{item}.json");
+            }
+        }
+
         public bool downloadLanguages(List<String> newLanguages)
         {
             try
@@ -62,7 +70,7 @@ namespace Morse_Translator
                 }
                 else
                 {
-                    var values = new Dictionary<string, List<String>>
+                    var values = new Dictionary<String, List<String>> 
                     {
                         { "languages", newLanguages }
                     };
@@ -94,6 +102,7 @@ namespace Morse_Translator
                 }
                 File.Delete(jsonPATH + "/languages.zip");
 
+                this.removeLanguages(newLanguages);
 
                 return true;
             }
