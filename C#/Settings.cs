@@ -48,15 +48,15 @@ namespace Morse_Translator
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show("Необходимите файлове не можаха да бъдат намерени.", "Error");
+                this.saveSound();
             }
             catch (Newtonsoft.Json.JsonReaderException)
             {
-                MessageBox.Show("Проблем в четенето на JSON файловете.\nЛипстващ елемент.", "Error");
+                MessageBox.Show("Problem reading sound settings.\nThe settings will be reset.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.saveSound();
             }
             catch (Exception)
             {
-                throw;
             }
         }
 
