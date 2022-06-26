@@ -69,7 +69,6 @@ namespace Morse_Translator
             }
             catch (Exception)
             {
-                throw;
             }
         }
     }
