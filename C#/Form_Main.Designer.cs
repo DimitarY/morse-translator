@@ -35,7 +35,7 @@
             this.minimizeBtn = new System.Windows.Forms.Button();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.trainerButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.homePageButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.translatorButton = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
@@ -103,7 +103,7 @@
             // leftPanel
             // 
             this.leftPanel.Controls.Add(this.trainerButton);
-            this.leftPanel.Controls.Add(this.button3);
+            this.leftPanel.Controls.Add(this.homePageButton);
             this.leftPanel.Controls.Add(this.settingsButton);
             this.leftPanel.Controls.Add(this.translatorButton);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -136,26 +136,27 @@
             this.trainerButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.trainerButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // button3
+            // homePageButton
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 65);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "BUTTON3";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Enter += new System.EventHandler(this.Button_Enter);
-            this.button3.Leave += new System.EventHandler(this.Button_Leave);
-            this.button3.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.button3.MouseLeave += new System.EventHandler(this.Button_Leave);
+            this.homePageButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.homePageButton.FlatAppearance.BorderSize = 0;
+            this.homePageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homePageButton.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homePageButton.ForeColor = System.Drawing.Color.White;
+            this.homePageButton.Location = new System.Drawing.Point(0, 0);
+            this.homePageButton.Margin = new System.Windows.Forms.Padding(2);
+            this.homePageButton.Name = "homePageButton";
+            this.homePageButton.Size = new System.Drawing.Size(120, 65);
+            this.homePageButton.TabIndex = 0;
+            this.homePageButton.Text = "Home Page";
+            this.homePageButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.homePageButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.homePageButton.UseVisualStyleBackColor = true;
+            this.homePageButton.Click += new System.EventHandler(this.homePageButton_Click);
+            this.homePageButton.Enter += new System.EventHandler(this.Button_Enter);
+            this.homePageButton.Leave += new System.EventHandler(this.Button_Leave);
+            this.homePageButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.homePageButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // settingsButton
             // 
@@ -241,6 +242,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Morse Translator";
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Shown += new System.EventHandler(this.Form_Main_Shown);
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
             this.leftPanel.ResumeLayout(false);
@@ -254,7 +256,7 @@
         private System.Windows.Forms.Label topPanelLabel;
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button homePageButton;
         private System.Windows.Forms.Button trainerButton;
         private System.Windows.Forms.Button translatorButton;
         private System.Windows.Forms.Panel centerPanel;

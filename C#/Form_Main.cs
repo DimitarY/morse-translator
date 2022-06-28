@@ -53,6 +53,22 @@ namespace Morse_Translator
         private void Main_Load(object sender, EventArgs e)
         {
             settings.startUp();
+            topPanel.Select();
+        }
+
+        private void Form_Main_Shown(object sender, EventArgs e)
+        {
+            if (!centerPanel.Controls.Contains(UserControl_HomePage.Instance))
+            {
+                centerPanel.Controls.Add(UserControl_HomePage.Instance);
+                UserControl_HomePage.Instance.Dock = DockStyle.Fill;
+            }
+
+            UserControl_HomePage.Instance.BringToFront();
+            UserControl_HomePage.Instance.Focus();
+            homePageButton.Font = new Font(homePageButton.Font, FontStyle.Underline);
+
+            // Must be at end
             if (worker.Available)
             {
                 if (this.ProductVersion != worker.getNewestVersion())
@@ -63,9 +79,6 @@ namespace Morse_Translator
                     }
                 }
             }
-
-            //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
-            // при страт да се провери за всички езици
         }
 
         private void topPanel_MouseDown(object sender, MouseEventArgs e)
@@ -88,6 +101,7 @@ namespace Morse_Translator
 
         private void menuChange()
         {
+            homePageButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
             translatorButton.Font = new Font(translatorButton.Font, FontStyle.Regular);
             trainerButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
             settingsButton.Font = new Font(trainerButton.Font, FontStyle.Regular);
@@ -97,6 +111,20 @@ namespace Morse_Translator
             sound.setWaveOut();
 
             System.GC.Collect();
+        }
+
+        private void homePageButton_Click(object sender, EventArgs e)
+        {
+            if (!centerPanel.Controls.Contains(UserControl_HomePage.Instance))
+            {
+                centerPanel.Controls.Add(UserControl_HomePage.Instance);
+                UserControl_HomePage.Instance.Dock = DockStyle.Fill;
+            }
+
+            UserControl_HomePage.Instance.BringToFront();
+            UserControl_HomePage.Instance.Focus();
+            menuChange();
+            (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
         }
 
         //TODO: не зарежда евента Enter при първи старт
@@ -135,6 +163,7 @@ namespace Morse_Translator
                 centerPanel.Controls.Add(UserControl_Settings.Instance);
                 UserControl_Settings.Instance.Dock = DockStyle.Fill;
             }
+
             this.Cursor = Cursors.WaitCursor;
             worker.isAvailable();
             this.Cursor = Cursors.Default;
