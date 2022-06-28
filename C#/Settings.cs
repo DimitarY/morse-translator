@@ -24,7 +24,7 @@ namespace Morse_Translator
 
         private static string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Morse Translator/Settings";
 
-        public void startUp() //TODO: да се провери дали може да се прави по по-добър начин
+        public void startUp()
         {
             if (!Directory.Exists(settingsDirectory))
             {

@@ -127,7 +127,6 @@ namespace Morse_Translator
             (sender as Button).Font = new Font((sender as Button).Font, FontStyle.Underline);
         }
 
-        //TODO: не зарежда евента Enter при първи старт
         private void translaorButton_Click(object sender, EventArgs e)
         {
             if (!centerPanel.Controls.Contains(UserControl_Translator.Instance))

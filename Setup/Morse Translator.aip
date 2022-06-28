@@ -16,7 +16,7 @@
     <ROW Property="ProductCode" Value="1033:{2B605C8C-8AA7-41AD-AA68-DF5E06D16A3B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Morse Translator"/>
-    <ROW Property="ProductVersion" Value="0.5.5.0"/>
+    <ROW Property="ProductVersion" Value="0.5.5.2"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{7A335AA1-4497-43C6-87AA-5F6E12894924}"/>
