@@ -43,8 +43,12 @@
             this.downloadAllLanguagesButton = new System.Windows.Forms.Button();
             this.updateLanguagesButton = new System.Windows.Forms.Button();
             this.languagesPanelLabel = new System.Windows.Forms.Label();
+            this.offlinePanel = new System.Windows.Forms.Panel();
+            this.offlineLabel = new System.Windows.Forms.Label();
+            this.refreshLabel = new System.Windows.Forms.Label();
             this.sountPanel.SuspendLayout();
             this.languagesPanel.SuspendLayout();
+            this.offlinePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelFrequency
@@ -253,11 +257,44 @@
             this.languagesPanelLabel.TabIndex = 9;
             this.languagesPanelLabel.Text = "Languages settings";
             // 
+            // offlinePanel
+            // 
+            this.offlinePanel.Controls.Add(this.refreshLabel);
+            this.offlinePanel.Controls.Add(this.offlineLabel);
+            this.offlinePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.offlinePanel.Location = new System.Drawing.Point(164, 219);
+            this.offlinePanel.Name = "offlinePanel";
+            this.offlinePanel.Size = new System.Drawing.Size(300, 80);
+            this.offlinePanel.TabIndex = 4;
+            this.offlinePanel.Visible = false;
+            // 
+            // offlineLabel
+            // 
+            this.offlineLabel.AutoSize = true;
+            this.offlineLabel.Location = new System.Drawing.Point(26, 10);
+            this.offlineLabel.Name = "offlineLabel";
+            this.offlineLabel.Size = new System.Drawing.Size(247, 25);
+            this.offlineLabel.TabIndex = 4;
+            this.offlineLabel.Text = "You are currently offline.";
+            // 
+            // refreshLabel
+            // 
+            this.refreshLabel.AutoSize = true;
+            this.refreshLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.refreshLabel.Location = new System.Drawing.Point(44, 45);
+            this.refreshLabel.Name = "refreshLabel";
+            this.refreshLabel.Size = new System.Drawing.Size(211, 25);
+            this.refreshLabel.TabIndex = 5;
+            this.refreshLabel.Text = "Click here to refresh.";
+            this.refreshLabel.Click += new System.EventHandler(this.refreshLabel_Click);
+            // 
             // UserControl_Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.Controls.Add(this.offlinePanel);
             this.Controls.Add(this.languagesPanel);
             this.Controls.Add(this.sountPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
@@ -270,6 +307,8 @@
             this.sountPanel.PerformLayout();
             this.languagesPanel.ResumeLayout(false);
             this.languagesPanel.PerformLayout();
+            this.offlinePanel.ResumeLayout(false);
+            this.offlinePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -291,5 +330,8 @@
         private System.Windows.Forms.Button updateLanguagesButton;
         private System.Windows.Forms.Label languagesPanelLabel;
         private System.Windows.Forms.Button downloadAllLanguagesButton;
+        private System.Windows.Forms.Panel offlinePanel;
+        private System.Windows.Forms.Label offlineLabel;
+        private System.Windows.Forms.Label refreshLabel;
     }
 }

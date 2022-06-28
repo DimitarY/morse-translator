@@ -37,7 +37,7 @@ namespace Morse_Translator
         // END
 
         private Sound sound;
-        private Settings settings;       
+        private Settings settings;
 
         public Form_Main()
         {
@@ -123,7 +123,9 @@ namespace Morse_Translator
                 centerPanel.Controls.Add(UserControl_Settings.Instance);
                 UserControl_Settings.Instance.Dock = DockStyle.Fill;
             }
+            this.Cursor = Cursors.WaitCursor;
             API_Worker.Instance.isAvailable();
+            this.Cursor = Cursors.Default;
             UserControl_Settings.Instance.BringToFront();
             UserControl_Settings.Instance.Focus();
             menuChange();

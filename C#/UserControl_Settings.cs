@@ -45,6 +45,7 @@ namespace Morse_Translator
             textBoxControl_Word.Text = sound.CodeWord.ToString();
 
             downloadAllLanguagesButton.Enabled = api.Available;
+            offlinePanel.Visible = !api.Available;
             this.updateLanguageList();
         }
 
@@ -138,6 +139,14 @@ namespace Morse_Translator
         {
             if (api.downloadLanguages(null)) MessageBox.Show("Аll languages downloaded successfully.", "Downloaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.updateLanguageList();
+        }
+
+        private void refreshLabel_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            api.isAvailable();
+            this.Cursor = Cursors.Default;
+            if (api.Available) this.UserControl_Settings_Enter(sender, e);
         }
     }
 }
