@@ -116,10 +116,15 @@ namespace Morse_Translator
             {
                 if (input[i] == ' ')
                 {
-                    if (i > 0 && input[i - 1] != ' ') temp += "  ";
+                    if (i >= 3 && input[i - 1] == 'S' && input[i - 2] == 'O' && input[i - 3] == 'S')
+                    {
+                        data.RemoveRange(data.Count - 3, 3);
+                        temp += "...---...    ";
+                    }
+                    else if (i > 0 && input[i - 1] != ' ') temp += "  ";
                     else temp += "     ";
                 }
-                else if (input[i] == 'S' && i >= 2 && input[i - 1] == 'O' && input[i - 2] == 'S')
+                else if (i >= 2 && i + 1 == input.Length && input[i] == 'S' && input[i - 1] == 'O' && input[i - 2] == 'S')
                 {
                     data.RemoveRange(data.Count - 2, 2);
                     temp += "...---...";
