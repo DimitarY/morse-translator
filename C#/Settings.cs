@@ -40,7 +40,7 @@ namespace Morse_Translator
                 {
                     string json = r.ReadToEnd();
                     Sound newSound = JsonConvert.DeserializeObject<Sound>(json);
-                    
+
                     sound.Frequency = newSound.Frequency;
                     sound.WPM = newSound.WPM;
                     sound.CodeWord = newSound.CodeWord;

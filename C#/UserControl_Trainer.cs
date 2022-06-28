@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -41,7 +40,7 @@ namespace Morse_Translator
 
         private void UserControl_Trainer_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void UserControl_Trainer_Enter(object sender, EventArgs e)
