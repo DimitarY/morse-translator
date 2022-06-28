@@ -38,6 +38,7 @@ namespace Morse_Translator
 
         private Sound sound;
         private Settings settings;
+        private API_Worker worker;
 
         public Form_Main()
         {
@@ -45,12 +46,23 @@ namespace Morse_Translator
 
             sound = Sound.Instance;
             settings = Settings.Instance;
-            API_Worker.Instance.isAvailable();
+            worker = API_Worker.Instance;
+            worker.isAvailable();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             settings.startUp();
+            if (worker.Available)
+            {
+                if (this.ProductVersion != worker.getNewestVersion())
+                {
+                    if (MessageBox.Show("There is a new version of the program.\nDo you want to download it?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(worker.DownloadLink);
+                    }
+                }
+            }
 
             //TODO: когато се стартира програмата tabidex застава на първия бутон и той остава селецтиран докато не се кликне някъде или не се ми с мишката
             // при страт да се провери за всички езици
@@ -124,7 +136,7 @@ namespace Morse_Translator
                 UserControl_Settings.Instance.Dock = DockStyle.Fill;
             }
             this.Cursor = Cursors.WaitCursor;
-            API_Worker.Instance.isAvailable();
+            worker.isAvailable();
             this.Cursor = Cursors.Default;
             UserControl_Settings.Instance.BringToFront();
             UserControl_Settings.Instance.Focus();

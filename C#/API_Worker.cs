@@ -26,11 +26,13 @@ namespace Morse_Translator
 
         private static string apiURL = "http://127.0.0.1:5000";
         private static string languagesPATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Morse Translator/Languages";
+        private static string downloadLink = apiURL + "/download/Morse_Translator";
         private bool available = false;
 
+        public string DownloadLink { get { return downloadLink; } }
         public bool Available { get { return this.available; } }
 
-        public bool isAvailable() //TODO: има лек лаг докато проверява дали може да свали данни от сървъра (когато сървъра не е онлайн или не може да се дотъпи)
+        public bool isAvailable()
         {
             try
             {
@@ -126,6 +128,30 @@ namespace Morse_Translator
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public string getNewestVersion()
+        {
+            try
+            {
+                string data = "", result = "";
+                using (var client = new HttpClient())
+                {
+                    var endpoint = new Uri(apiURL + "/get/setup-version");
+                    data = client.GetAsync(endpoint).Result.Content.ReadAsStringAsync().Result;
+                }
+
+                foreach (var item in data)
+                {
+                    if (char.IsDigit(item) || item == '.') result += item;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }
