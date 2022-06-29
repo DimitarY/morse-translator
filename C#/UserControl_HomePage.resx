@@ -117,4 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>The translator menu contains a field for entering text or code, a field with translation, a drop-down menu with mode and language selection (from text to code or vice versa), a button for clearing the input field, a button for changing the mode (swaps text / code from the input field to the translation field and vice versa) and a button for "speaking" the code.
+
+The trainer menu contains a drop-down menu for selecting a language, a button for loading the language and two boxes for selecting whether to display numbers and symbols. When the language load button is pressed, the letters of the given language and the corresponding Morse code under each letter will be displayed.
+
+The settings contain buttons and text boxes for adjusting the Morse code sound wave and language settings.</value>
+  </data>
 </root>

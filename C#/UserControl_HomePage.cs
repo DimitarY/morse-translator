@@ -33,7 +33,9 @@ namespace Morse_Translator
 
         private void UserControl_HomePage_Load(object sender, EventArgs e)
         {
-
+            label1.Text = "The space between symbols(dots and dashes) of the same letter is 1 time unit.\n" +
+                "The space between letters is 3 time units.\n" +
+                "The space between words is 7 time units.";
         }
 
         private void UserControl_HomePage_Enter(object sender, EventArgs e)
