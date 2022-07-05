@@ -42,5 +42,10 @@ namespace Morse_Translator
         {
 
         }
+
+        private void richTextBox1_Enter(object sender, EventArgs e)
+        {
+            panel2Label.Select();
+        }
     }
 }
