@@ -108,20 +108,20 @@ namespace Morse_Translator
         {
             if (playThread.IsAlive)
             {
-                //inputBox.ReadOnly = false;
-                //exchangeButton.Enabled = true;
-                //clearButton.Enabled = true;
-                //selectionBox.Enabled = true;
+                inputBox.ReadOnly = false;
+                exchangeButton.Enabled = true;
+                clearButton.Enabled = true;
+                selectionBox.Enabled = true;
                 playButton.BackgroundImage = Properties.Resources.play_button;
                 playThread.Abort();
                 sound.setWaveOut();
             }
             else
             {
-                //inputBox.ReadOnly = true;
-                //exchangeButton.Enabled = false;
-                //clearButton.Enabled = false;
-                //selectionBox.Enabled = false;
+                inputBox.ReadOnly = true;
+                exchangeButton.Enabled = false;
+                clearButton.Enabled = false;
+                selectionBox.Enabled = false;
                 int selectionIndex = selectionBox.SelectedIndex;
                 string inBox = inputBox.Text, outBox = outputBox.Text;
 
@@ -131,12 +131,15 @@ namespace Morse_Translator
                     Thread.CurrentThread.IsBackground = true;
                     if (selectionIndex >= 0 && selectionIndex % 2 == 0) sound.playMorseAsSound(outBox);
                     else if (selectionIndex >= 0 && selectionIndex % 2 != 0) sound.playMorseAsSound(inBox);
-                    //inputBox.ReadOnly = false;
-                    //exchangeButton.Enabled = true;
-                    //clearButton.Enabled = true;
-                    //selectionBox.Enabled = true;
-                    playButton.BackgroundImage = Properties.Resources.play_button;
-                    Cursor.Position = Cursor.Position;
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        inputBox.ReadOnly = false;
+                        exchangeButton.Enabled = true;
+                        clearButton.Enabled = true;
+                        selectionBox.Enabled = true;
+                        Cursor.Position = Cursor.Position;
+                        playButton.BackgroundImage = Properties.Resources.play_button;
+                    }));
                 });
                 playThread.Start();
             }
